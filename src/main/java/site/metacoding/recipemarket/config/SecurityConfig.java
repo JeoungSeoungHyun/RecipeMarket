@@ -26,12 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests() // http로부터 request를 받을 때,
                 .antMatchers("/s/**").authenticated() // /s/ 주소로 접속하면 인증이 필요하다.
                 .anyRequest().permitAll() // 모든 request의 권한을 허용한다.
-
                 .and()
-
                 .formLogin()
                 .loginPage("/login-form") // 사용자 정의 로그인 페이지
-                .defaultSuccessUrl("/") // 로그인 성공 후 이동 페이지
                 .loginProcessingUrl("/login") // 로그인 Form Action Url
                 .successHandler(new LoginSuccessHandler()) // 로그인 성공 후 핸들러
                 .failureHandler(new LoginFailureHandler()); // 로그인 실패 후 핸들러

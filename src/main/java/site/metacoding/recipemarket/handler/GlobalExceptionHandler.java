@@ -3,10 +3,12 @@ package site.metacoding.recipemarket.handler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import site.metacoding.recipemarket.handler.ex.CustomApiException;
 import site.metacoding.recipemarket.handler.ex.CustomException;
 
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomApiException.class)
