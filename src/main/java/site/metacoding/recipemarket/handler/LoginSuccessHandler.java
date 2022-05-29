@@ -16,6 +16,8 @@ import site.metacoding.recipemarket.domain.user.User;
 // 시큐리티로 로그인 성공 시 작동 (시큐리티 안에 있는 세션 값을 세션에 넣어줌)
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
+    // private final User user;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
@@ -24,6 +26,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
         HttpSession session = request.getSession();
         session.setAttribute("principal", principal); // 세션에 시큐리티가 가지고 있는 loginUser 넣어주기
+
+        // 쿠키를 여기에 담아놓는건가?
+        // if (user.getRemember() != null && user.getRemember().equals("on")) {
+        // response.addHeader("Set-Cookie", "remember=" + user.getUsername());
+        // }
+
         response.sendRedirect("/");
     }
 

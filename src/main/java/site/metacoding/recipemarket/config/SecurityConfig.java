@@ -13,10 +13,10 @@ import site.metacoding.recipemarket.handler.LoginSuccessHandler;
 @EnableWebSecurity // 시큐리티 활성화
 @Configuration // IoC 등록
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Bean
     public BCryptPasswordEncoder encode() { // Password 해시화
-        return new BCryptPasswordEncoder(); 
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -31,6 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login-form") // 사용자 정의 로그인 페이지
                 .loginProcessingUrl("/login") // 로그인 Form Action Url
                 .successHandler(new LoginSuccessHandler()) // 로그인 성공 후 핸들러
-                .failureHandler(new LoginFailureHandler()); // 로그인 실패 후 핸들러
+                .failureHandler(new LoginFailureHandler())
+                .and()
+                .rememberMe()
+                .key("remember"); // 로그인 실패 후 핸들러
+
+        // 아이디 기억하기
+        // http.rememberMe()
+        // .key("remember")
+        // .userDetailsService(userDetailsService());
     }
 }

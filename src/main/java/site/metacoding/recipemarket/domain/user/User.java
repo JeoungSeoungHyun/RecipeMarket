@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -47,5 +48,11 @@ public class User {
     private LocalDateTime createDate;
     @LastModifiedDate // update 할때만 동작
     private LocalDateTime updateDate;
+
+    // DB테이블과 상관없음
+    // 로그인할 때 유저아이디 Remember me 하려고 추가하려고 했으나
+    // 시큐리티로 쿠키 담아 아이디만 기억하는 방법을 아직 찾지 못함
+    @Transient
+    private String remember;
 
 }
