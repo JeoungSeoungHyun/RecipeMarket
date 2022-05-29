@@ -9,4 +9,9 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UserController {
 
+    // 로그인 페이지
+    @GetMapping("/login-form")
+    public String loginForm() {
+        return "/user/loginForm";
+    }
 }
