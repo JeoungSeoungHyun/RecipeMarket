@@ -10,3 +10,30 @@
 10. 레시피 목록 텍스트
 11. 리스트 레시피 사진
 */
+
+
+/*폰트*/
+body {
+    font-family: 'Noto Sans KR',
+        sans-serif;
+}
+
+ /*패딩*/
+ .search-box-padding {
+    padding-top: 180px;
+}
+
+.main-padding-lg {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.my-padding-right1 {
+    padding-right: 8%;
+}
+
+.my-padding-side1 {
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
