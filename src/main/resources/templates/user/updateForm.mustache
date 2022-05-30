@@ -1,0 +1,50 @@
+{{> /layout/joinHeader}}
+
+<!-- 회원가입폼시작 -->
+<div class="my-padding-top my-flex-container">
+    <div class="my-flex-item1">
+        <img class="my-img-cover my-img-login" src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
+            alt="">
+    </div>
+    <div class="my-flex-item2">
+        <form action="/action_page.php" class="was-validated">
+            <div class="form-group">
+                <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">아이디를 입력해주세요</div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">닉네입을 입력해주세요</div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">비밀번호를 입력해주세요</div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">비밀번호를 한번 더 입력해주세요</div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">이메일을 입력해주세요</div>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Check this checkbox to continue.</div>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<!-- 회원가입폼 끝 -->
+
+{{> /layout/footer}}

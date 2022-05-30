@@ -1,12 +1,12 @@
 /* 
-1. 로고 
+1. 로고 o
 2. 버튼(회원가입, 수정, 탈퇴)
 3. 아이디찾기 버튼
 4. 큰 버튼
-5. 타이틀 텍스트 디자인 (회원가입,로그인, 찾기)
+5. 타이틀 텍스트 디자인 (회원가입,로그인, 찾기) o
 6. 작은 글자
 7. 박스텍스트
-8. fakeimage
+8. fakeimage 
 10. 레시피 목록 텍스트
 11. 리스트 레시피 사진
 */
@@ -23,9 +23,13 @@ body {
     padding-top: 180px;
 }
 
-.main-padding-lg {
+.recipebox-padding-lg {
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+.my-padding-top{
+    padding-top: 200px;
 }
 
 .my-padding-right1 {
@@ -35,5 +39,25 @@ body {
 .my-padding-side1 {
     padding-left: 8%;
     padding-right: 8%;
+}
+
+/*플렉스*/
+.my-flex-container{
+    display: flex;
+}
+
+.my-flex-item1{
+    flex: 1;
+}
+.my-flex-item2{
+    flex: 2;
+}
+.my-flex-item3{
+    flex: 6;
+}
+
+/*프로필 이미지*/
+.my-profile-img{
+    border-radius: 70%;
 }
 

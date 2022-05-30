@@ -1,0 +1,66 @@
+{{> /layout/joinHeader}}
+
+<!-- 회원가입폼시작 -->
+<div class="my-padding-top my-flex-container">
+    <!-- 사진 -->
+    <div class="my-flex-item1 my-img-box2 my-img-login">
+        <img class="my-img-cover my-profile-img " src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
+            alt="">
+    </div>
+    <!-- 정보 -->
+    <div class="my-flex-item2">
+        <form action="/action_page.php" class="was-validated">
+            <div class="form-group">
+                <div class="d-flex">
+                    <span class="my-flex-item1 my-text-center">아이디 </span>
+                    <input type="text" class="form-control my-flex-item3" id="uname" placeholder="아이디를 입력해주세요"
+                        name="uname" minlength="4" maxlength="20" required />
+                </div>
+                <div class="valid-feedback">Valid.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex">
+                    <span class="my-flex-item1 my-text-center">닉네임</span>
+                    <input type="text" class="form-control my-flex-item3" id="pwd" placeholder="닉네임을 입력해주세요"
+                        name="nickname" minlength="1" maxlength="12" required />
+                </div>
+                <div class="valid-feedback">Valid.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex">
+                    <span class="my-flex-item1 my-text-center">비밀번호</span>
+                    <input type="password" class="form-control my-flex-item3" id="pwd1" placeholder="비밀번호를 입력해주세요"
+                        name="pswd1" minlength="8" maxlength="16" required />
+                </div>
+                <div class="valid-feedback">Valid.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex">
+                    <span class="my-flex-item1 my-text-center">비밀번호 확인</span>
+                    <input type="password" class="form-control my-flex-item3" id="pwd2" placeholder="비밀번호를 한번 더 입력해주세요"
+                        name="pswd2" minlength="8" maxlength="16" required />
+                </div>
+                <div class="valid-feedback">Valid.</div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex">
+                    <span class="my-flex-item1 my-text-center">이메일</span>
+                    <input type="email" class="form-control  my-flex-item3" id="pwd" placeholder="이메일을 입력해주세요"
+                        name="email" minlength="1" maxlength="60" required />
+                </div>
+                <div class="valid-feedback">Valid.</div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">회원가입</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 회원가입폼 끝 -->
+
+{{> /layout/footer}}

@@ -1,5 +1,5 @@
    /*font-size*/
-   .my-font-sm1 {
+.my-font-sm1 {
     font-size: 5px;
 }
 
@@ -7,11 +7,16 @@
     font-size: 13px;
 }
 
-
 .my-font-md {
     font-size: 17px;
 }
 
 .my-font-lg {
     font-size: 22px;
+}
+
+.my-text-center{
+margin-top: 0.8%;
+text-align: center;
+    
 }
