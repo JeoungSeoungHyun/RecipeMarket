@@ -23,6 +23,17 @@
         <!-- 헤더 시작-->
         <div class="fixed-top ">
             <div class="my-nav-box">
+
+                {{#principal}}
+                <div class="nav justify-content-end">
+                    <div class="my-padding-right1">
+                        <a class="my-font-sm1" href=""> 로그아웃 </a>
+                        <span class="my-font-sm1"> | </span>
+                        <a class="my-font-sm1" href=""> 마이페이지 </a>
+                    </div>
+                </div>
+                {{/principal}}
+                {{^principal}}
                 <div class="nav justify-content-end">
                     <div class="my-padding-right1">
                         <a class="my-font-sm1" href=""> 회원가입 </a>
@@ -30,6 +41,7 @@
                         <a class="my-font-sm1" href=""> 로그인 </a>
                     </div>
                 </div>
+                {{/principal}}
 
                 <div>
                     <h2 class="nav justify-content-center"></h2>

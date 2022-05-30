@@ -1,0 +1,11 @@
+.my-auth-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my_auth_form_box {
+    display: inline-block;
+    justify-content: center;
+    width: 400px;
+}
