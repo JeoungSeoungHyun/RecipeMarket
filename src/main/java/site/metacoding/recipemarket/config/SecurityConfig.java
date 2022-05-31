@@ -31,14 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login-form") // 사용자 정의 로그인 페이지
                 .loginProcessingUrl("/login") // 로그인 Form Action Url
                 .successHandler(new LoginSuccessHandler()) // 로그인 성공 후 핸들러
-                .failureHandler(new LoginFailureHandler())
-                .and()
-                .rememberMe()
-                .key("remember"); // 로그인 실패 후 핸들러
-
-        // 아이디 기억하기
-        // http.rememberMe()
-        // .key("remember")
-        // .userDetailsService(userDetailsService());
+                .failureHandler(new LoginFailureHandler()); // 로그인 실패 후 핸들러
     }
 }

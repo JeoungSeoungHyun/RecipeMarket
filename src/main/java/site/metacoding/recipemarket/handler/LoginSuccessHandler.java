@@ -27,11 +27,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = request.getSession();
         session.setAttribute("principal", principal); // 세션에 시큐리티가 가지고 있는 loginUser 넣어주기
 
-        // 쿠키를 여기에 담아놓는건가?
-        // if (user.getRemember() != null && user.getRemember().equals("on")) {
-        // response.addHeader("Set-Cookie", "remember=" + user.getUsername());
-        // }
-
         response.sendRedirect("/");
     }
 
