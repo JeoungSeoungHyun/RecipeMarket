@@ -32,7 +32,11 @@ body {
     padding-top: 50px;
 }
 
-.my-padding-top{
+.my-padding-top-sm{
+    padding-top: 7px;
+}
+
+.my-padding-top-lg{
     padding-top: 200px;
 }
 
@@ -73,4 +77,35 @@ body {
 .my-profile-img{
     border-radius: 70%;
 }
+
+/* 위치 */
+.my-position-center{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+/* 버튼 */
+.my-btn-sm{
+
+}
+
+.my-btn-md{
+    width: 120px;
+    height: 40px;
+    color: black;
+    border-color: #5F0080;
+    background-color: white;
+    border: 1px solid;
+}
+
+.my-btn-lg{
+    width: 400px;
+    height: 40px;
+    color: white;
+    background-color: #5F0080;
+    border: 0;
+}
+
 
