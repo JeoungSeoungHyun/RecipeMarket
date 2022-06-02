@@ -21,4 +21,14 @@ public class UserController {
         return "/user/loginForm";
     }
 
+    @GetMapping("find-username-form")
+    public String findUsernameForm() {
+        return "/user/findUsernameForm";
+    }
+
+    @GetMapping("find-password-form")
+    public String findPasswordForm() {
+        return "/user/findPasswordForm";
+    }
+
 }

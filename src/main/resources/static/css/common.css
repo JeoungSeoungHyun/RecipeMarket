@@ -40,10 +40,18 @@ body {
     padding-top: 200px;
 }
 
+
 .my-padding-right1 {
     padding-right: 8%;
 }
 
+.my-padding-bottom-sm {
+    padding-bottom: 7px;
+}
+
+.my-padding-bottom-md {
+    padding-bottom: 30px;
+}
 .my-padding-side1 {
     padding-left: 8%;
     padding-right: 8%;
