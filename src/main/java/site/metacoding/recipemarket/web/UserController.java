@@ -5,13 +5,19 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.recipemarket.config.auth.LoginUser;
 import site.metacoding.recipemarket.handler.ex.CustomException;
 import site.metacoding.recipemarket.service.UserService;
 import site.metacoding.recipemarket.web.dto.user.JoinReqDto;
@@ -29,23 +35,12 @@ public class UserController {
         return "/user/joinForm";
     }
 
-    // 회원가입
-    @PostMapping("/join")
-    public String join(@Valid JoinReqDto joinReqDto, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                errorMap.put(fe.getField(), fe.getDefaultMessage());
-            }
-            // 이부분에서 data리턴인지 html 리턴인지 이것만 구분해서 터트려줘!!
-            throw new CustomException(errorMap.toString());
-        }
-
-        // 핵심 로직
-        userService.회원가입(joinReqDto.toEntity());
-
-        return "redirect:/login-form";
+    @PutMapping("/api/user/{id}/profile-img")
+    public ResponseEntity<?> profileImgUpdate(
+            @AuthenticationPrincipal LoginUser loginUser,
+            MultipartFile profileImgFile) {
+        userService.프로파일이미지변경(loginUser.getUser(), profileImgFile);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 로그인 페이지
