@@ -5,8 +5,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,15 +38,12 @@ public class JoinReqDto {
     @Email
     private String email;
 
-    private MultipartFile file;
-
-    public User toEntity(String profileImg) {
+    public User toEntity() {
         User user = new User();
         user.setUsername(username);
         user.setNickname(nickname);
         user.setPassword(password);
         user.setEmail(email);
-        user.setProfileImg(profileImg);
         return user;
     }
 }
