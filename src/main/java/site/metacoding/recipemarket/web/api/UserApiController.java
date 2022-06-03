@@ -1,18 +1,12 @@
 package site.metacoding.recipemarket.web.api;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.recipemarket.service.UserService;
-import site.metacoding.recipemarket.util.UtilValid;
-import site.metacoding.recipemarket.web.dto.user.JoinReqDto;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,14 +33,4 @@ public class UserApiController {
         return new ResponseEntity<>(isNotSame, HttpStatus.OK);
     }
 
-    // 회원가입
-    @PostMapping("/join")
-    public String join(@Valid JoinReqDto joinReqDto, BindingResult bindingResult) {
-
-        UtilValid.요청에러처리(bindingResult);
-
-        userService.회원가입(joinReqDto.toEntity());
-
-        return "redirect:/login-form";
-    }
 }

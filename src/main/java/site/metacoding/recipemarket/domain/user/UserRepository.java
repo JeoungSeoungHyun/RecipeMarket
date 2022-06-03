@@ -8,11 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    // 시큐리티 로그인 시 유저네임 셀렉트하기 위한 쿼리
+    // 시큐리티 로그인 시 유저네임 셀렉트
+    // 아이디 중복체크
     @Query(value = "SELECT * FROM user WHERE username = :username", nativeQuery = true)
     Optional<User> findByUsername(@Param("username") String username);
 
-    // 존재하는 이메일인지 체크하는 쿼리
+    // 이메일 중복체크
     @Query(value = "SELECT * FROM user WHERE email = :email", nativeQuery = true)
     Optional<User> findByEmail(@Param("email") String email);
 }
