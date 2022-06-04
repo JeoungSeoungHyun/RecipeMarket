@@ -13,10 +13,10 @@ import site.metacoding.recipemarket.handler.LoginSuccessHandler;
 @EnableWebSecurity // 시큐리티 활성화
 @Configuration // IoC 등록
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
     @Bean
     public BCryptPasswordEncoder encode() { // Password 해시화
-        return new BCryptPasswordEncoder(); 
+        return new BCryptPasswordEncoder();
     }
 
     @Override
