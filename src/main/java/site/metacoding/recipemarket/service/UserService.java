@@ -14,6 +14,7 @@ import site.metacoding.recipemarket.handler.ex.CustomException;
 import site.metacoding.recipemarket.util.UtilEmail;
 import site.metacoding.recipemarket.web.dto.user.IdFindReqDto;
 import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
+import site.metacoding.recipemarket.web.dto.user.UserRespDto;
 
 @RequiredArgsConstructor
 @Service
@@ -22,6 +23,25 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UtilEmail utilEmail;
+
+    public UserRespDto 마이페이지(Integer userId) {
+
+        UserRespDto resp = new UserRespDto(); // 필요한 유저정보만 dto에 담을 것
+
+        // 해당 유저 찾기
+        Optional<User> userOp = userRepository.findById(userId);
+
+        if (userOp.isPresent()) { // 유저가 있으면 dto에 옮겨담기
+            User userEntity = userOp.get();
+            resp.setUsername(userEntity.getUsername());
+            resp.setNickname(userEntity.getNickname());
+            resp.setEmail(userEntity.getEmail());
+            resp.setProfileImg(userEntity.getProfileImg());
+            return resp; // user정보가 담긴 dto 리턴
+        } else { // 유저가 없으면 예외 처리
+            throw new CustomException("해당 유저를 찾을 수 없습니다.");
+        }
+    }
 
     // 아이디 찾기
     @Transactional
