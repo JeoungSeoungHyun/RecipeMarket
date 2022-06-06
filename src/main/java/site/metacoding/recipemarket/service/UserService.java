@@ -42,6 +42,7 @@ public class UserService {
     public void 임시패스워드발급(PasswordResetReqDto passwordResetReqDto) {
 
         String tempPw; // 임시 비밀번호 변수
+        User userEntity; // 유저 엔티티 변수
 
         // 1. username, email 이 같은 것이 있는지 체크 (DB)
         Optional<User> userOp = userRepository.findByUsernameAndEmail(
@@ -51,7 +52,7 @@ public class UserService {
         // 2. 같은 것이 있다면 DB password 초기화 - BCrypt 해시 - update 하기 (DB)
         if (userOp.isPresent()) {
             // 회원정보 불러오기
-            User userEntity = userOp.get(); // 영속화
+            userEntity = userOp.get(); // 영속화
 
             // 임시 비밀번호 생성(UUID 이용)
             tempPw = UUID.randomUUID().toString().replace("-", ""); // -를 제거
@@ -65,8 +66,8 @@ public class UserService {
             throw new CustomException("해당 이메일이 존재하지 않습니다.");
         }
 
-        // 3. 임시 비밀번호 이메일로 전송
-        utilEmail.sendEmail("gih1214@naver.com", "임시 비밀번호 발급", "임시 비밀번호 : " + tempPw);
+        // 3. 임시 비밀번호 이메일로 전송 (받는 사람, 제목, 내용)
+        utilEmail.sendEmail(userEntity.getEmail(), "임시 비밀번호 발급", "임시 비밀번호 : " + tempPw);
 
     } // 더티체킹 (update)
 
