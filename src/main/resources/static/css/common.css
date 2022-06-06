@@ -1,10 +1,10 @@
 /* 
 1. 로고 o
-2. 버튼(회원가입, 수정, 탈퇴)
-3. 아이디찾기 버튼
-4. 큰 버튼
+2. 버튼(회원가입, 수정, 탈퇴) o
+3. 아이디찾기 버튼 o
+4. 큰 버튼 o
 5. 타이틀 텍스트 디자인 (회원가입,로그인, 찾기) o
-6. 작은 글자
+6. 작은 글자 o
 7. 박스텍스트
 8. fakeimage 
 10. 레시피 목록 텍스트
@@ -18,73 +18,7 @@ body {
         sans-serif;
 }
 
- /*패딩*/
- .search-box-padding {
-    padding-top: 180px;
-}
-
-.recipebox-padding-lg {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
-.footer-padding{
-    padding-top: 50px;
-}
-
-.my-padding-top-sm{
-    padding-top: 7px;
-}
-
-.my-padding-top-md{
-    padding-top: 20px;
-}
-
-.my-padding-top-lg{
-    padding-top: 200px;
-}
-
-
-.my-padding-right1 {
-    padding-right: 8%;
-}
-
-.my-padding-bottom-sm {
-    padding-bottom: 15px;
-}
-
-.my-padding-bottom-md {
-    padding-bottom: 30px;
-}
-.my-padding-side1 {
-    padding-left: 8%;
-    padding-right: 8%;
-}
-
-/*플렉스*/
-.my-flex-container{
-    display: flex;
-}
-
-.my-flex-item1{
-    flex: 1;
-}
-.my-flex-item2{
-    flex: 2;
-}
-
-.my-flex-item3{
-    flex: 3;
-}
-
-.my-flex-item4{
-    flex: 3;
-}
-
-.my-flex-item5{
-    flex: 5;
-}
-
+ 
 /*프로필 이미지*/
 .my-profile-img{
     border-radius: 70%;

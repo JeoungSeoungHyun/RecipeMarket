@@ -1,14 +1,15 @@
 {{> /layout/joinHeader}}
 
 <!-- 유저수저폼시작 -->
-<div class="my-padding-top-lg my-flex-container">
+
+<div class="my-padding-top-lg d-flex justify-content-cente" style="width:1000px; padding-left:100px;">
     <!-- 사진 -->
     <div class="my-flex-item1 my-img-box2 my-img-login">
-        <div class="my-padding-bottom-md">
+        <div>
             <img class="my-userimg-cover my-profile-img "
                 src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg" alt="">
         </div>
-        <div class="my-padding-top-md"><button type="submit" class="btn my-btn-sm-primary">회원탈퇴</button></div>
+        <div style="padding-top: 105px;"><button type="submit" class="btn my-btn-sm-primary">회원탈퇴</button></div>
     </div>
     <!-- 정보 -->
     <div class="my-flex-item2">
@@ -16,14 +17,15 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">아이디 </span>
-                    <input type="text" class="form-control my-flex-item3" id="uname" readonly />
+                    <input type="text" class="form-control my-flex-item3" id="username" readonly />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">닉네임</span>
-                    <input type="text" class="form-control my-flex-item3" id="pwd" required />
+                    <input type="text" class="text-box my-flex-item3" id="nickname" minlength="1" maxlength="12"
+                        required />
                 </div>
             </div>
 
@@ -31,7 +33,8 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">비밀번호</span>
-                    <input type="password" class="form-control my-flex-item3" id="pwd1" name="pswd1" required />
+                    <input type="password" class="text-box my-flex-item3" id="pwd1" name="pswd1" minlength="8"
+                        maxlength="16" required />
                 </div>
             </div>
 
@@ -39,7 +42,8 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">비밀번호 확인</span>
-                    <input type="password" class="form-control my-flex-item3" id="pwd2" name="pswd2" required />
+                    <input type="password" class="text-box my-flex-item3" id="pwd2" name="pswd2" minlength="8"
+                        maxlength="16" required />
                 </div>
             </div>
 
@@ -47,7 +51,8 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">이메일</span>
-                    <input type="email" class="form-control  my-flex-item3" id="pwd" name="email" required />
+                    <input type="email" class="text-box my-flex-item3" id="email" name="email" minlength="1"
+                        maxlength="60" required />
                 </div>
             </div>
 
