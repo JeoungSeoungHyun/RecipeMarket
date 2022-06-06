@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    // 비밀번호 찾기(초기화) 할 때 필요한 쿼리문
+    // 비밀번호 찾기(임시 비밀번호 발급) 할 때 필요한 쿼리문
     @Query(value = "SELECT * FROM user WHERE username = :username AND email = :email", nativeQuery = true)
     Optional<User> findByUsernameAndEmail(@Param("username") String username, @Param("email") String email);
 
@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT * FROM user WHERE username = :username", nativeQuery = true)
     Optional<User> findByUsername(@Param("username") String username);
 
+    // 아이디 찾기 시 이메일 셀렉트
     // 이메일 중복체크
     @Query(value = "SELECT * FROM user WHERE email = :email", nativeQuery = true)
     Optional<User> findByEmail(@Param("email") String email);

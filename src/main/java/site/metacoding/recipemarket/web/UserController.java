@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.recipemarket.service.UserService;
 import site.metacoding.recipemarket.util.UtilValid;
+import site.metacoding.recipemarket.web.dto.user.IdFindReqDto;
 import site.metacoding.recipemarket.web.dto.user.JoinReqDto;
 import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
 import site.metacoding.recipemarket.web.dto.user.RememberReqDto;
@@ -30,6 +31,22 @@ public class UserController {
     private final UserService userService;
     private final HttpServletResponse response;
     private final HttpServletRequest request;
+
+    // 아이디 찾기 페이지
+    @GetMapping("/find-username-form")
+    public String idFindForm() {
+        return "/user/findIdForm";
+    }
+
+    // 아이디 찾기 요청
+    @PostMapping("/find-username")
+    public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
+
+        UtilValid.요청에러처리(bindingResult);
+        String findUserId = userService.아이디찾기(idFindReqDto);
+        model.addAttribute("findUserId", findUserId);
+        return "/user/showIdForm";
+    }
 
     // 비밀번호 찾기 페이지
     @GetMapping("/reset-password-form")
