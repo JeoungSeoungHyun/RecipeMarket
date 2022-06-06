@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.recipemarket.service.UserService;
 import site.metacoding.recipemarket.util.UtilValid;
 import site.metacoding.recipemarket.web.dto.user.JoinReqDto;
+import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
 import site.metacoding.recipemarket.web.dto.user.RememberReqDto;
 
 @RequiredArgsConstructor
@@ -29,6 +30,22 @@ public class UserController {
     private final UserService userService;
     private final HttpServletResponse response;
     private final HttpServletRequest request;
+
+    // 비밀번호 찾기 페이지
+    @GetMapping("/reset-password-form")
+    public String passwordResetForm() {
+        return "/user/resetPwForm";
+    }
+
+    // 비밀번호 찾기 (임시 비밀번호 발급)
+    @PostMapping("/reset-password")
+    public String passwordReset(@Valid PasswordResetReqDto passwordResetReqDto, BindingResult bindingResult) {
+
+        UtilValid.요청에러처리(bindingResult);
+        userService.임시패스워드발급(passwordResetReqDto);
+
+        return "redirect:/login-form";
+    }
 
     // 회원가입
     @PostMapping("/join")

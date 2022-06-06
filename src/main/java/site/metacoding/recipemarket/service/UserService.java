@@ -1,6 +1,7 @@
 package site.metacoding.recipemarket.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.recipemarket.domain.user.User;
 import site.metacoding.recipemarket.domain.user.UserRepository;
+import site.metacoding.recipemarket.handler.ex.CustomException;
+import site.metacoding.recipemarket.util.UtilEmail;
+import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
 
 @RequiredArgsConstructor
 @Service
@@ -16,6 +20,41 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UtilEmail utilEmail;
+
+    @Transactional
+    public void 임시패스워드발급(PasswordResetReqDto passwordResetReqDto) {
+
+        String tempPw; // 임시 비밀번호 변수
+
+        // 1. username, email 이 같은 것이 있는지 체크 (DB)
+        Optional<User> userOp = userRepository.findByUsernameAndEmail(
+                passwordResetReqDto.getUsername(),
+                passwordResetReqDto.getEmail());
+
+        // 2. 같은 것이 있다면 DB password 초기화 - BCrypt 해시 - update 하기 (DB)
+        if (userOp.isPresent()) {
+            // 회원정보 불러오기
+            User userEntity = userOp.get(); // 영속화
+
+            // 임시 비밀번호 생성(UUID 이용)
+            tempPw = UUID.randomUUID().toString().replace("-", ""); // -를 제거
+            tempPw = tempPw.substring(0, 10); // tempPw를 앞에서부터 10자리까지 잘라줌
+
+            System.out.println("임시 비밀번호 확인 : " + tempPw);
+
+            // bCrypt에 임시 비밀번호를 인코딩해서 user 객체에 담기
+            String encPassword = bCryptPasswordEncoder.encode(tempPw);
+            userEntity.setPassword(encPassword);
+
+        } else {
+            throw new CustomException("해당 이메일이 존재하지 않습니다.");
+        }
+
+        // 3. 임시 비밀번호 이메일로 전송
+        utilEmail.sendEmail("gih1214@naver.com", "임시 비밀번호 발급", "임시 비밀번호 : " + tempPw);
+
+    } // 더티체킹 (update)
 
     public boolean 아이디중복체크(String username) {
         Optional<User> userOp = userRepository.findByUsername(username);
