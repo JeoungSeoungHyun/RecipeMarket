@@ -36,6 +36,10 @@ body {
     padding-top: 7px;
 }
 
+.my-padding-top-md{
+    padding-top: 20px;
+}
+
 .my-padding-top-lg{
     padding-top: 200px;
 }
@@ -46,7 +50,7 @@ body {
 }
 
 .my-padding-bottom-sm {
-    padding-bottom: 7px;
+    padding-bottom: 15px;
 }
 
 .my-padding-bottom-md {
@@ -95,14 +99,26 @@ body {
 }
 
 /* 버튼 */
-.my-btn-sm{
+.my-btn-sm-primary{
+    width:90px;
+    height: 40px;
+    color:#5F0080;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
+}
 
+.my-btn-sm-black{
+    width:90px;
+    height: 40px;
+    color:black;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
 }
 
 .my-btn-md{
     width: 120px;
     height: 40px;
-    color: black;
+    color: #4C4C4C;
     border-color: #5F0080;
     background-color: white;
     border: 1px solid;
