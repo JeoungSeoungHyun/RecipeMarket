@@ -7,21 +7,26 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.recipemarket.config.auth.LoginUser;
+import site.metacoding.recipemarket.handler.ex.CustomException;
 import site.metacoding.recipemarket.service.UserService;
 import site.metacoding.recipemarket.util.UtilValid;
 import site.metacoding.recipemarket.web.dto.user.IdFindReqDto;
 import site.metacoding.recipemarket.web.dto.user.JoinReqDto;
 import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
 import site.metacoding.recipemarket.web.dto.user.RememberReqDto;
+import site.metacoding.recipemarket.web.dto.user.UserRespDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -31,6 +36,27 @@ public class UserController {
     private final UserService userService;
     private final HttpServletResponse response;
     private final HttpServletRequest request;
+
+    // 마이 페이지
+    @GetMapping("/s/user/{userId}")
+    public String myPageForm(@PathVariable Integer userId, Model model, @AuthenticationPrincipal LoginUser loginUser) {
+
+        // 1. 회원정보
+        UserRespDto resp = null; // 필요한 유저정보만 dto에 담을 것
+
+        // 권한체크 (주소 userId와 세션 userId가 같은지 확인)
+        if (userId == loginUser.getUser().getId()) {
+            resp = userService.마이페이지(userId);
+        } else {
+            throw new CustomException("접근 권한이 없습니다.");
+        }
+
+        model.addAttribute("user", resp); // model에 user 정보 담기
+
+        // 2. 즐겨찾기
+
+        return "/user/myPageForm";
+    }
 
     // 아이디 찾기 페이지
     @GetMapping("/find-username-form")
