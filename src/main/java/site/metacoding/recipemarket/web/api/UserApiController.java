@@ -64,8 +64,8 @@ public class UserApiController {
     // @RequestBody -> BufferedReader + JSON 파싱(자바 오브젝트)
     // @ResponseBody -> BufferedWriter + JSON 파싱(자바 오브젝트)
     // 회원 정보 수정
-    @PutMapping("/s/api/user/{userid}")
-    public @ResponseBody ResponseDto<?> update(@PathVariable Integer id, @RequestBody UpdateReqDto updateReqDto) {
+    @PutMapping("/s/api/user/{userId}")
+    public @ResponseBody ResponseDto<?> userUpdate(@PathVariable Integer userId, @RequestBody UpdateReqDto updateReqDto) {
 
         User principal = (User) session.getAttribute("principal");
 
@@ -75,19 +75,19 @@ public class UserApiController {
         }
 
         // 2. 권한체크
-        if (principal.getId() != id) {
+        if (principal.getId() != userId) {
             return new ResponseDto<String>(-1, "권한 없음", null);
         }
 
-        User userEntity = userService.회원수정(id, updateReqDto);
+        User userEntity = userService.회원수정(userId, updateReqDto);
         session.setAttribute("principal", userEntity); // 세션변경 - 덮어쓰기
 
         return new ResponseDto<String>(1, "성공", null);
     }
 
     // 회원 탈퇴
-    @DeleteMapping("/s/api/user/{userid}")
-    public @ResponseBody ResponseDto<?> userDelete(@PathVariable Integer id) {
+    @DeleteMapping("/s/api/user/{userId}")
+    public @ResponseBody ResponseDto<?> userDelete(@PathVariable Integer userId) {
         
         User principal = (User) session.getAttribute("principal");
 
@@ -97,11 +97,11 @@ public class UserApiController {
         }
 
         // 2. 권한체크
-        if (principal.getId() != id) {
+        if (principal.getId() != userId) {
             return new ResponseDto<String>(-1, "권한 없음", null);
         }
 
-        userService.회원탈퇴(id);
+        userService.회원탈퇴(userId);
         session.invalidate();
 
         return new ResponseDto<>(1, "성공", null);

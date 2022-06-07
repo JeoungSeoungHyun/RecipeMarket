@@ -61,30 +61,35 @@
                     <div class="form-group">
                         <input type="email" class="form-control" id="email" value="{{principal.email}}" name="email">
                     </div>
-                    <button type="button" class="btn btn-primary" id="btn-update">회원 수정</button>
-                    <button type="button" class="btn btn-warning" id="btn-delete">회원 탈퇴</button>
+                    <button type="button" class="btn btn-primary" id="btn-update"
+                        onclick="updateUser()">회원 수정</button>
+                    <button type="button" class="btn btn-warning" id="btn-delete"
+                        onclick="deleteUser('{{principal.id}}')">회원 탈퇴</button>
                 </form>
             </div>
 
         </div>
 
         <script>
-            let userId = $("#userId").val();
-            // 회원 수정, 탈퇴 만지작대다보니 안됨 ㅜ
             // 프로필 이미지 등록 시작!!!!!!!!!!!!!!!!!============================
             $("#profile-img-btn").click(() => {
                 $("#profile-img-input").click(); // 파일 선택창이 뜬다.
             });
+
             $("#profile-img-input").change((event) => {
                 profileImgUpdate(event);
             }); // 파일을 선택하면!!
+
             async function profileImgUpdate(event) {
                 // image/png 이런식의 파일임.
                 let f = event.target.files[0];
+
                 if (!f.type.match("image.*")) {
                     alert("이미지를 선택해주세요!");
                     return;
                 }
+
+                let userId = $("#userId").val();
 
                 // Multipart File => header 가 필요 없음
                 // multipart/form-data 로 파일을 전송하는 것이 가장 편하다.
@@ -92,10 +97,12 @@
                 // form 태그 key:value 데이터 변환 => formData
                 let fileForm = $("#fileForm")[0];
                 let formData = new FormData(fileForm);
+
                 let response = await fetch(`/s/api/user/profile-img`, {
                     method: "put",
                     body: formData
                 });
+
                 if (response.status == 200) {
                     imgPreview(event, f);
                     alert("프로파일 변경 성공");
@@ -114,49 +121,57 @@
             }
             // 프로필 이미지 등록 종료!!!!!!!!!!!!!!!!!============================
 
-            // 안됨.........................
             // 회원정보 수정 시작!!!!!!!!!!!!!!!!!============================
-            $("#btn-update").click(() => {
-                update();
-            });
+            // 회원 정보 수정 함수
+            async function updateUser() {
+                let userId = $("#userId").val();
 
-            async function update() {
-                // 1. jquery로 nickname, password, email 찾아서 자바스크립트 오브젝트로 만들기
                 let updateDto = {
                     nickname: $("#nickname").val(),
                     password: $("#password").val(),
                     email: $("#email").val()
                 }
 
-                // 2. fetch 요청하기
                 let response = await fetch(`/s/api/user/${userId}`, {
+                    method: "PUT",
+                    body: JSON.stringify(updateDto),
                     headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    method: 'PUT',
-                    body: JSON.stringify(updateDto) // 자바스크립트 오브젝트를 JSON으로 변환
+                        "Content-Type": "application/json; charset=utf-8"
+                    }
                 });
+                // console.log(response);
 
-                let responseParse = await response.json(); // 이거... 머지????
+                let responseParse = await response.json();
+                // console.log(responseParse);
 
-                console.log(responseParse);
-
-                // ResponseDto로 응답받아서 code가 1이면 alert창으로 수정 성공 띄우기
                 if (responseParse.code == 1) {
-                    alert("수정이 완료되었습니다.");
-                    location.href = `/s/user/${userId}/update-form`;
+                    alert("업데이트 성공");
+                    location.href = `/s/user/${userId}`;
                 } else {
-                    alert("수정에 실패했습니다.");
+                    alert("업데이트 실패");
                 }
             }
             // 회원정보 수정 종료!!!!!!!!!!!!!!!!!============================
 
-            // 안됨.,.................................
-            // 회원 탈퇴 시작!!!!!!!!!!!!!!!!!============================
-            $("#btn-delete").click(() => {
-                delete ();
-            });
 
+            // 회원 탈퇴 시작!!!!!!!!!!!!!!!!!============================
+            // 회원 탈퇴 함수
+            async function deleteUser(userId) {
+                let response = await fetch(`/s/api/user/${userId}`, {
+                    method: "DELETE",
+                });
+
+                // console.log(response);
+
+                let responseParse = await response.json();
+                console.log(responseParse);
+                if (responseParse.code == 1) {
+                    alert("회원탈퇴 성공");
+                    location.href = "/";
+                } else {
+                    alert("회원탈퇴 실패 : " + responseParse.msg);
+                }
+            }
             // 회원 탈퇴 종료!!!!!!!!!!!!!!!!!============================
         </script>
 
