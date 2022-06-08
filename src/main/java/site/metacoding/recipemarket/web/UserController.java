@@ -3,6 +3,7 @@ package site.metacoding.recipemarket.web;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ public class UserController {
     private final UserService userService;
     private final HttpServletResponse response;
     private final HttpServletRequest request;
+    private final HttpSession session;
 
     // 마이 페이지
     @GetMapping("/s/user/{userId}")
@@ -145,6 +147,12 @@ public class UserController {
         }
 
         return "/user/loginForm";
+    }
+
+    // 회원 정보 수정 페이지
+    @GetMapping("/s/user/{userId}/update-form")
+    public String updateForm() {
+        return "/user/updateForm";
     }
 
 }
