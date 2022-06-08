@@ -24,6 +24,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Value("${file.path}")
+    private String uploadFolder;
+
     // 아이디 중복 체크하기
     public boolean 아이디중복체크(String username) {
         Optional<User> userOp = userRepository.findByUsername(username);
@@ -81,9 +84,6 @@ public class UserService {
         }
 
     } // 트랜잭션이 걸려있으면 @Service가 종료될 때 변경 감지 후 DB에 UPDATE -> 더티체킹
-
-    @Value("${file.path}")
-    private String uploadFolder;
 
     // 프로파일 이미지 변경하기
     @Transactional

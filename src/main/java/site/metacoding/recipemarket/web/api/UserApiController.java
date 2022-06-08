@@ -69,12 +69,7 @@ public class UserApiController {
 
         User principal = (User) session.getAttribute("principal");
 
-        // 1. 인증 체크
-        if (principal == null) {
-            return new ResponseDto<String>(-1, "인증 실패", null);
-        }
-
-        // 2. 권한체크
+        // 권한체크
         if (principal.getId() != userId) {
             return new ResponseDto<String>(-1, "권한 없음", null);
         }
@@ -91,12 +86,7 @@ public class UserApiController {
         
         User principal = (User) session.getAttribute("principal");
 
-        // 1. 인증 체크
-        if (principal == null) {
-            return new ResponseDto<String>(-1, "인증 실패", null);
-        }
-
-        // 2. 권한체크
+        // 권한체크
         if (principal.getId() != userId) {
             return new ResponseDto<String>(-1, "권한 없음", null);
         }
