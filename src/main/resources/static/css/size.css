@@ -1,3 +1,9 @@
+
+/* 박스 사이즈 */
+.form-box{
+    width: 400px;
+}
+
 /*패딩*/
 .search-box-padding {
     padding-top: 180px;
@@ -18,6 +24,10 @@
 
 .my-padding-right1 {
     padding-right: 10%;
+}
+
+.my-padding-bottom-xsm {
+    padding-bottom: 7px;
 }
 
 .my-padding-bottom-sm {

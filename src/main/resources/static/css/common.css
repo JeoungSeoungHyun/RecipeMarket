@@ -49,6 +49,14 @@ body {
     border: 1px solid #F7F7F7;;
 }
 
+.my-btn-sm-primary{
+    width:90px;
+    height: 40px;
+    color:#5F0080;
+    background-color: white;
+    border: 1px solid #5F0080;
+}
+
 .my-btn-md{
     width: 120px;
     height: 40px;
@@ -66,4 +74,12 @@ body {
     border: 0;
 }
 
+.gridbox{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px,1fr));
+    margin: auto;
+    margin-bottom: 30px;
+    justify-items: center;
+    place-items: center;
+}
 

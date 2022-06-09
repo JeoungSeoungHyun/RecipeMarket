@@ -35,4 +35,9 @@ public class UserController {
         return "/user/updateForm";
     }
 
+    @GetMapping("mypage-form")
+    public String myPage() {
+        return "/user/myPageForm";
+    }
+
 }
