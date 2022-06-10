@@ -16,6 +16,8 @@
 body {
     font-family: 'Noto Sans KR',
         sans-serif;
+    overflow:hidden;
+    
 }
 
  
@@ -83,3 +85,11 @@ body {
     place-items: center;
 }
 
+.gridbox2{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px,1fr));
+    margin: auto;
+    margin-bottom: 30px;
+    justify-items: center;
+    place-items: center;
+}

@@ -40,4 +40,14 @@ public class UserController {
         return "/user/myPageForm";
     }
 
+    @GetMapping("list-form")
+    public String list() {
+        return "/post/listForm";
+    }
+
+    @GetMapping("detail-form")
+    public String detail() {
+        return "/post/detailForm";
+    }
+
 }
