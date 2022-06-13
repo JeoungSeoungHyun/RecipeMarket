@@ -16,11 +16,14 @@
     background-color: rgb(153,  153,  153);
 }
 
-
 .my-title-font {
     color: rgb(51,  51,  51);
 }
 
 .my-font-color-black{
     color: black;
+}
+
+.my-font-color-white{
+    color: white;
 }

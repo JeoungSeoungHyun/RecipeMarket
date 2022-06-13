@@ -11,6 +11,16 @@
     align-items: center;
 }
 
+.detail-box-lg{
+    width: 1100px;
+}
+
+.footer-box{
+    width: 1300px;
+    height: 100px;
+    background-color: white
+}
+
 /*패딩*/
 .search-box-padding {
     padding-top: 180px;
