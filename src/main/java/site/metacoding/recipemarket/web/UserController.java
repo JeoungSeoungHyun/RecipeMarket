@@ -63,7 +63,12 @@ public class UserController {
     // 아이디 찾기 페이지
     @GetMapping("/find-username-form")
     public String idFindForm() {
-        return "/user/findIdForm";
+        return "/user/findUsernameForm";
+    }
+
+    @GetMapping("/find-username")
+    public String findusername() {
+        return "/user/showIdForm";
     }
 
     // 아이디 찾기 요청
@@ -79,7 +84,7 @@ public class UserController {
     // 비밀번호 찾기 페이지
     @GetMapping("/reset-password-form")
     public String passwordResetForm() {
-        return "/user/resetPwForm";
+        return "/user/resetPasswordForm";
     }
 
     // 비밀번호 찾기 (임시 비밀번호 발급)

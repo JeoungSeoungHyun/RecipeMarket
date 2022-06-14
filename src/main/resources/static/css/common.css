@@ -63,9 +63,16 @@ body {
     width: 120px;
     height: 40px;
     color: #4C4C4C;
-    border-color: #5F0080;
+    border: 1px solid #5F0080;
     background-color: white;
-    border: 1px solid;
+}
+
+.my-btn-md-primary{
+    width: 120px;
+    height: 40px;
+    color: white;
+    border: 1px solid #5F0080;
+    background-color: #5F0080;
 }
 
 .my-btn-lg{
