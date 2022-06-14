@@ -1,0 +1,32 @@
+{{> /layout/joinHeader}}
+
+<!-- 컨테이너 시작 -->
+<div class="my-position-center form-box">
+
+    <!-- 로그인 폼 시작 -->
+    <div class="my-padding-top-lg ">
+        <form action="/action_page.php" class="my-auth-form-box">
+            <div class="my-padding-bottom-md">
+                <h4>아이디 찾기</h4>
+            </div>
+            <div class="mb-3 mt-3 ">
+                <div class="my-padding-bottom-sm" style="float: left;"><span>이메일</span></div>
+                <input type="email" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary my-btn-lg">아이디 찾기</button>
+            </div>
+            <div class="my-padding-top-sm d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary my-btn-md">비밀번호 찾기</button>
+                <button type="submit" class="btn btn-primary my-btn-md">로그인</button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- 컨테이너 끝 -->
+</div>
+
+
+
+{{> /layout/footer}}
