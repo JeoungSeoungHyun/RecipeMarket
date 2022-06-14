@@ -1,0 +1,123 @@
+{{> /layout/joinHeader}}
+<!-- 유저 정보 폼 -->
+<div class="my-padding-top-lg d-flex" style="width:650px; margin:auto; height:500px">
+    <!-- 사진 -->
+    <div class="my-flex-item1 my-img-box2 my-img-login">
+        <div>
+            <img class="my-userimg-cover my-profile-img "
+                src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg" alt="">
+        </div>
+    </div>
+    <!-- 정보 -->
+    <div class="my-flex-item2">
+        <form action="/action_page.php" class="was-validated">
+            <div class="form-group">
+                <div class="d-flex my-padding-bottom-xsm">
+                    <span class="my-flex-item1 my-text-center">아이디 </span>
+                    <input type="text" class="text-box my-flex-item3" id="username" readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex my-padding-bottom-xsm">
+                    <span class="my-flex-item1 my-text-center">닉네임</span>
+                    <input type="text" class="text-box my-flex-item3" id="nickname" minlength="1" maxlength="12"
+                        readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="d-flex my-padding-bottom-xsm">
+                    <span class="my-flex-item1 my-text-center">이메일</span>
+                    <input type="email" class="text-box my-flex-item3" id="email" name="email" minlength="1"
+                        maxlength="60" readonly />
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn my-btn-sm-primary">수정</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- 유저 정보 폼 -->
+
+<!-- 즐겨찾기 -->
+<div style="width: 1100px;">
+    <div class="my-padding-bottom-sm" style="padding-left: 7%;">
+        <span class="my-font-lg ">즐겨찾기</span>
+    </div>
+    <div class="gridbox">
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="my-img-box1">
+                <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
+                    class="card-img-top my-img-cover" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 즐겨찾기  끝-->
+
+<!-- 버튼 -->
+<ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+</ul>
+<!-- 버튼 -->
+{{> /layout/footer}}

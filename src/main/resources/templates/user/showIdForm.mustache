@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{{> /layout/joinHeader}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!-- 컨테이너 시작 -->
+<div class="my-position-center form-box">
 
-<body>
-    {{findUserId}}
-</body>
+    <!-- 로그인 폼 시작 -->
+    <div class="my-padding-top-lg " style="height: 70vh;">
+        <form action="/action_page.php" class="my-auth-form-box">
+            <div class="mb-3 mt-3 ">
+                <div class="my-padding-bottom-sm" style="float: left;"><span>아이디 </span></div>
+                <input type="email" class="form-control" id="username" name="username" readonly>
+            </div>
+            <div class="my-padding-top-sm d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary my-btn-md">비밀번호 찾기</button>
+                <button type="submit" class="btn btn-primary my-btn-md-primary">로그인</button>
+            </div>
 
-</html>
+        </form>
+    </div>
+
+    <!-- 컨테이너 끝 -->
+</div>
+
+
+
+{{> /layout/footer}}

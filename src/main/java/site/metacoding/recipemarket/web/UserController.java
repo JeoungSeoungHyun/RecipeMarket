@@ -63,12 +63,12 @@ public class UserController {
     // 아이디 찾기 페이지
     @GetMapping("/find-username-form")
     public String idFindForm() {
-        return "/user/findIdForm";
+        return "/user/findUsernameForm";
     }
 
     // 아이디 찾기 요청
     @PostMapping("/find-username")
-    public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
+    public String findusername(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
 
         UtilValid.요청에러처리(bindingResult);
         String findUserId = userService.아이디찾기(idFindReqDto);
@@ -79,7 +79,7 @@ public class UserController {
     // 비밀번호 찾기 페이지
     @GetMapping("/reset-password-form")
     public String passwordResetForm() {
-        return "/user/resetPwForm";
+        return "/user/resetPasswordForm";
     }
 
     // 비밀번호 찾기 (임시 비밀번호 발급)
