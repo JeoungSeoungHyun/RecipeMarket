@@ -66,14 +66,9 @@ public class UserController {
         return "/user/findUsernameForm";
     }
 
-    @GetMapping("/find-username")
-    public String findusername() {
-        return "/user/showIdForm";
-    }
-
     // 아이디 찾기 요청
     @PostMapping("/find-username")
-    public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
+    public String findusername(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
 
         UtilValid.요청에러처리(bindingResult);
         String findUserId = userService.아이디찾기(idFindReqDto);
