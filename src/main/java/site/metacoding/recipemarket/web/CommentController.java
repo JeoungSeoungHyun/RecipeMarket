@@ -2,7 +2,6 @@ package site.metacoding.recipemarket.web;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -17,16 +16,7 @@ import site.metacoding.recipemarket.service.CommentService;
 public class CommentController {
     private final CommentService commentService;
 
-    @GetMapping("/post")
-    public String list() {
-        return "/post/list";
-    }
-
-    @GetMapping("/post/{postId}")
-    public String detail() {
-        return "/post/detail";
-    }
-
+    // 상세보기 페이지에 댓글 등록하기
     @PostMapping("/s/post/{postId}/comment")
     public String write(@PathVariable Integer postId, Comment comment, @AuthenticationPrincipal LoginUser loginUser) {
 
