@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 </head>
 
 <body>
@@ -32,8 +33,8 @@
                 <div>{{comment.content}}</div>
                 <div class="d-flex">
                     <div class="font-italic">작성자 : {{comment.user.username}} &nbsp;</div>
-                    <button class="badge bg-primary">수정</button>
                     {{#auth}}
+                    <button id="btn-update" type="button" class="badge bg-primary">수정</button>
                     <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
                     {{/auth}}
                 </div>

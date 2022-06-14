@@ -12,12 +12,28 @@ import site.metacoding.recipemarket.domain.post.Post;
 import site.metacoding.recipemarket.domain.post.PostRepository;
 import site.metacoding.recipemarket.domain.user.User;
 import site.metacoding.recipemarket.handler.ex.CustomException;
+import site.metacoding.recipemarket.web.dto.comment.CommentReqDto;
 
 @RequiredArgsConstructor
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+
+    @Transactional
+    public void 댓글수정(Integer id, User principal, CommentReqDto dto) {
+        Optional<Comment> commentOp = commentRepository.findById(id);
+
+        if (commentOp.isPresent()) { // id가 존재하면
+            if (principal.getId() != commentOp.get().getUser().getId()) { // 세션 id와 디비에 있는 id가 다르면
+                throw new CustomException("수정 권한이 없습니다."); // 권한 X
+            }
+        } else { // id가 존재하지 않으면 예외처리
+            throw new RuntimeException("해당 댓글이 없습니다");
+        }
+        Comment commentEntity = commentOp.get();
+        commentEntity.setContent(dto.toEntity().getContent()); // 영속화된 오브젝트 수정
+    }
 
     @Transactional
     public void 댓글삭제(Integer id, User principal) {
