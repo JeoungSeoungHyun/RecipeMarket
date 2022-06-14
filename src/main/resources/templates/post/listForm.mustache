@@ -23,43 +23,47 @@
         <h1>리스트 페이지</h1>
         <br />
         <div class="table-responsive">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>썸네일</th>
-                <th>제목</th>
-                <th>url</th>
-                <th>작성일</th>
-                <th>수정일</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#post}}
-              <tr>
-                <td>{{#id}}{{id}}{{/id}}{{^id}}null{{/id}}</td>
-                <td>{{title}}</td>
-                <td>{{thumnail}}</td>
-                <td>{{url}}</td>
-                <td>{{createDate}}</td>
-                <td>{{updateDate}}</td>
-              </tr>
-              {{/post}}
-            </tbody>
-          </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>썸네일</th>
+                        <th>제목</th>
+                        <th>url</th>
+                        <th>작성일</th>
+                        <th>수정일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#data}}
+                    {{#posts}}
+                    <tr>
+                        <td>{{#id}}{{id}}{{/id}}{{^id}}null{{/id}}</td>
+                        <td>{{title}}</td>
+                        <td>{{thumnail}}</td>
+                        <td>{{url}}</td>
+                        <td>{{createDate}}</td>
+                        <td>{{updateDate}}</td>
+                    </tr>
+                    {{/posts}}
+                </tbody>
+            </table>
         </div>
-      </div>
-      
-      {{#data}}
+    </div>
+
+
     <div class="container">
         <ul class="pagination justify-content-center">
-            <li id="first" class="page-item"><a class="page-link" href="/post/?page=0"><<</a></li>
-            <li id="prev" class="page-item"><a class="page-link" href="/post/?page={{prev}}"><</a></li>
-            <li class="page-item"><a class="page-link" href="/post/?page={{pageNumber}}">1</a></li>
-            <li class="page-item active"><a class="page-link" href="/post/?page={{pageNumber}}">{{posts.number}}</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li id="next" class="page-item"><a class="page-link" href="/post/?page={{next}}">></a></li>
-            <li id="last" class="page-item"><a class="page-link" href="/post/?page={{posts.totalPages}}">>></a></li>
+            <li id="first" class="page-item"><a class="page-link" href="/post/?page=0"> << </a>
+            </li>
+            <li id="prev" class="page-item"><a class="page-link" href="/post/?page={{prev}}"> < </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="/post/?page={{pageNumber}}">{{prev}}</a></li>
+            <li class="page-item active"><a class="page-link" href="/post/?page={{pageNumber}}">{{pageNumber}}</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">{{next}}</a></li>
+            <li id="next" class="page-item"><a class="page-link" href="/post/?page={{next}}"> > </a></li>
+            <li id="last" class="page-item"><a class="page-link" href="/post/?page={{posts.totalPages}}"> >> </a></li>
         </ul>
     </div>
 

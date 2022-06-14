@@ -33,11 +33,13 @@ public class PostService {
             pageNumbers.add(i);
         }
 
+        Integer nowPage = postsEntity.getNumber() + 1;
+
         PostRespDto postRespDto = new PostRespDto(
             postsEntity, 
-            postsEntity.getNumber() - 1, // 현재 페이지 번호 -1
-            postsEntity.getNumber(), // 현재 페이지 번호
-            postsEntity.getNumber() + 1, // 현재 페이지 번호 +1
+            nowPage - 1, // 현재 페이지 번호 -1
+            nowPage, // 현재 페이지 번호
+            nowPage + 1, // 현재 페이지 번호 +1
             pageNumbers
         );
 
