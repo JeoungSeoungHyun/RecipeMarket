@@ -5,24 +5,26 @@
 
     <!-- 로그인 폼 시작 -->
     <div class="my-padding-top-lg ">
-        <form action="/action_page.php" class="my-auth-form-box">
+        <form action="/login" method="post" class="my-auth-form-box">
             <div>
                 <h4>로그인</h4>
             </div>
             <div class="mb-3 mt-3">
-                <input type="text" class="form-control" id="username" placeholder="아이디를 입력해주세요" name="username">
+                <input type="text" class="form-control" id="username" placeholder="아이디를 입력해주세요" name="username"
+                    value="{{#remember}}{{.}}{{/remember}}" required>
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요" name="password">
+                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요" name="password"
+                    required>
             </div>
             <div class="form-check mb-3 d-flex">
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember">
+                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
                     아이디 기억하기
                 </label>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary my-btn-lg">로그인</button>
+                <button type="submit" class="btn btn-primary my-btn-lg" id="btn-login">로그인</button>
             </div>
             <div class="my-padding-top-sm d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary my-btn-md">아이디 찾기</button>
@@ -36,6 +38,26 @@
     <!-- 컨테이너 끝 -->
 </div>
 
-
+<!-- RememberMe fetch로 전송하기 -->
+<script>
+    $("#btn-login").click(() => {
+        rememberCheck();
+    });
+    async function rememberCheck() {
+        let checked = $("#remember").is(':checked');
+        let loginDto = {
+            username: $("#username").val(),
+            remember: checked ? "on" : "off"
+        }
+        // console.log(loginDto);
+        let response = await fetch("/remember", {
+            method: 'POST',
+            body: JSON.stringify(loginDto),
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+    }
+</script>
 
 {{> /layout/footer}}

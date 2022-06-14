@@ -1,15 +1,22 @@
-{{> /layout/joinHeader}}
-
 <!-- 유저수정폼시작 -->
-
+<input type="hidden" class="my_hidden" id="userId" value="{{principal.id}}" />
 <div class="my-padding-top-lg d-flex justify-content-cente" style="width:900px; margin:auto;">
     <!-- 사진 -->
     <div class="my-flex-item1 my-img-box2 my-img-login">
         <div>
-            <img class="my-userimg-cover my-profile-img "
-                src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg" alt="">
+            {{#principal}}
+            {{#profileImg}}
+            <img src="/upload/{{profileImg}}" class="my-userimg-cover my-profile-img" id="profile-img-btn">
+            {{/profileImg}}
+            {{^profileImg}}
+            <img src="https://i1.sndcdn.com/avatars-000373392764-zp0p80-t500x500.jpg"
+                class="my-userimg-cover my-profile-img" id="profile-img-btn">
+            {{/profileImg}}
+            {{/principal}}
+            <form id="fileForm">
+                <input type="file" style="display:none ;" id="profile-img-input" name="profileImgFile" />
+            </form>
         </div>
-        <div style="padding-top: 105px;"><button type="submit" class="btn my-btn-sm-primary">회원탈퇴</button></div>
     </div>
     <!-- 정보 -->
     <div class="my-flex-item2">
@@ -17,15 +24,16 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">아이디 </span>
-                    <input type="text" class="text-box my-flex-item3" id="username" readonly />
+                    <input type="text" class="text-box my-flex-item3" id="username" name="username"
+                        value="{{principal.username}}" readonly />
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">닉네임</span>
-                    <input type="text" class="text-box my-flex-item3" id="nickname" minlength="1" maxlength="12"
-                        required />
+                    <input type="text" class="text-box my-flex-item3" id="nickname" name="nickname"
+                        value="{{principal.nickname}}" minlength="1" maxlength="12" required />
                 </div>
             </div>
 
@@ -33,7 +41,7 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">비밀번호</span>
-                    <input type="password" class="text-box my-flex-item3" id="pwd1" name="pswd1" minlength="8"
+                    <input type="password" class="text-box my-flex-item3" id="password" name="password" minlength="8"
                         maxlength="16" required />
                 </div>
             </div>
@@ -42,7 +50,7 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">비밀번호 확인</span>
-                    <input type="password" class="text-box my-flex-item3" id="pwd2" name="pswd2" minlength="8"
+                    <input type="password" class="text-box my-flex-item3" id="password2" name="password2" minlength="8"
                         maxlength="16" required />
                 </div>
             </div>
@@ -51,18 +59,122 @@
             <div class="form-group">
                 <div class="d-flex my-padding-bottom-sm">
                     <span class="my-flex-item1 my-text-center">이메일</span>
-                    <input type="email" class="text-box my-flex-item3" id="email" name="email" minlength="1"
-                        maxlength="60" required />
+                    <input type="email" class="text-box my-flex-item3" id="email" name="email"
+                        value="{{principal.email}}" minlength="1" maxlength="60" required />
                 </div>
             </div>
 
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn my-btn-sm-black">수정</button>
+                <button type="submit" class="btn my-btn-sm-primary" style="margin-right: 10px;">회원탈퇴</button>
+                <button type="submit" class="btn my-btn-sm-primary">수정</button>
             </div>
         </form>
     </div>
 </div>
 <!-- 유저수정폼 끝 -->
+<script>
+    // 프로필 이미지 등록 시작!!!!!!!!!!!!!!!!!============================
+    $("#profile-img-btn").click(() => {
+        $("#profile-img-input").click(); // 파일 선택창이 뜬다.
+    });
 
+    $("#profile-img-input").change((event) => {
+        profileImgUpdate(event);
+    }); // 파일을 선택하면!!
+
+    async function profileImgUpdate(event) {
+        // image/png 이런식의 파일임.
+        let f = event.target.files[0];
+
+        if (!f.type.match("image.*")) {
+            alert("이미지를 선택해주세요!");
+            return;
+        }
+
+        let userId = $("#userId").val();
+
+        // Multipart File => header 가 필요 없음
+        // multipart/form-data 로 파일을 전송하는 것이 가장 편하다.
+        // form 태그 자바스크립트 객체 찾기 => fileForm
+        // form 태그 key:value 데이터 변환 => formData
+        let fileForm = $("#fileForm")[0];
+        let formData = new FormData(fileForm);
+
+        let response = await fetch(`/s/api/user/profile-img`, {
+            method: "put",
+            body: formData
+        });
+
+        if (response.status == 200) {
+            imgPreview(event, f);
+            alert("프로파일 변경 성공");
+        } else {
+            alert("프로파일 변경 실패");
+        }
+    }
+    function imgPreview(event, f) {
+        let reader = new FileReader();
+        // 콜백 (파일 이미지가 객체화 되면!!)
+        reader.onload = (event) => {
+            //console.log(event.target.result);
+            $("#profile-img-btn").attr("src", event.target.result);
+        }
+        reader.readAsDataURL(f); // 비동기 실행(I/O)
+    }
+    // 프로필 이미지 등록 종료!!!!!!!!!!!!!!!!!============================
+
+    // 회원정보 수정 시작!!!!!!!!!!!!!!!!!============================
+    // 회원 정보 수정 함수
+    async function updateUser() {
+        let userId = $("#userId").val();
+
+        let updateDto = {
+            nickname: $("#nickname").val(),
+            password: $("#password").val(),
+            email: $("#email").val()
+        }
+
+        let response = await fetch(`/s/api/user/${userId}`, {
+            method: "PUT",
+            body: JSON.stringify(updateDto),
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            }
+        });
+        // console.log(response);
+
+        let responseParse = await response.json();
+        // console.log(responseParse);
+
+        if (responseParse.code == 1) {
+            alert("업데이트 성공");
+            location.href = `/s/user/${userId}`;
+        } else {
+            alert("업데이트 실패");
+        }
+    }
+    // 회원정보 수정 종료!!!!!!!!!!!!!!!!!============================
+
+
+    // 회원 탈퇴 시작!!!!!!!!!!!!!!!!!============================
+    // 회원 탈퇴 함수
+    async function deleteUser(userId) {
+        let response = await fetch(`/s/api/user/${userId}`, {
+            method: "DELETE",
+        });
+
+        // console.log(response);
+
+        let responseParse = await response.json();
+        console.log(responseParse);
+        if (responseParse.code == 1) {
+            alert("회원탈퇴 성공");
+            location.href = "/";
+        } else {
+            alert("회원탈퇴 실패 : " + responseParse.msg);
+        }
+    }
+    // 회원 탈퇴 종료!!!!!!!!!!!!!!!!!============================
+</script>
 {{> /layout/footer}}
