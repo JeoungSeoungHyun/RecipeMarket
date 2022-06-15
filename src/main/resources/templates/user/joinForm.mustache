@@ -10,15 +10,14 @@
     <!-- 정보 -->
     <center>
         <div style="width: 700px; margin:auto">
-            <form action="/action_page.php" class="was-validated">
+            <form action="/join" method="post" class="was-validated">
                 <div class="my-padding-bottom-md">
                     <h4>회원가입</h4>
                 </div>
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">아이디 </span>
-                        <input type="text" class="form-control my-flex-item3" id="username" placeholder="아이디를 입력해주세요"
-                            name="username" minlength="4" maxlength="20" required />
+                        <input type="text" class="form-control my-flex-item3" id="username" placeholder="아이디를 입력해주세요" name="username" minlength="4" maxlength="20" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -26,8 +25,7 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">닉네임</span>
-                        <input type="text" class="form-control my-flex-item3" id="nickname" placeholder="닉네임을 입력해주세요"
-                            name="nickname" minlength="1" maxlength="12" required />
+                        <input type="text" class="form-control my-flex-item3" id="nickname" placeholder="닉네임을 입력해주세요" name="nickname" minlength="1" maxlength="12" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -35,8 +33,7 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">비밀번호</span>
-                        <input type="password" class="form-control my-flex-item3" id="pwd1" placeholder="비밀번호를 입력해주세요"
-                            name="pswd1" minlength="8" maxlength="16" required />
+                        <input type="password" class="form-control my-flex-item3" id="password" placeholder="비밀번호를 입력해주세요" name="password" minlength="8" maxlength="16" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -44,8 +41,7 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">비밀번호 확인</span>
-                        <input type="password" class="form-control my-flex-item3" id="pwd2"
-                            placeholder="비밀번호를 한번 더 입력해주세요" name="pswd2" minlength="8" maxlength="16" required />
+                        <input type="password" class="form-control my-flex-item3" id="same-password" placeholder="비밀번호를 한번 더 입력해주세요" name="same-password" minlength="8" maxlength="16" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -53,8 +49,7 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">이메일</span>
-                        <input type="email" class="form-control  my-flex-item3" id="pwd" placeholder="이메일을 입력해주세요"
-                            name="email" minlength="1" maxlength="60" required />
+                        <input type="email" class="form-control  my-flex-item3" id="email" placeholder="이메일을 입력해주세요" name="email" minlength="1" maxlength="60" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>

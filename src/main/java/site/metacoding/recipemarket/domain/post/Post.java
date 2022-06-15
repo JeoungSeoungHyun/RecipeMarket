@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -46,6 +48,5 @@ public class Post {
     @OneToMany(mappedBy = "post") // 연관관계의 주인의 변수명
     private List<Comment> comments;
 
-    @CreatedDate // insert 할때만 동작
     private LocalDateTime postDate;
 }
