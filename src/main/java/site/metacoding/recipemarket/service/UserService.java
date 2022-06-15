@@ -161,7 +161,7 @@ public class UserService {
 
     // 프로파일 이미지 변경하기
     @Transactional
-    public void 프로파일이미지변경(User principal, MultipartFile profileImgFile, HttpSession session) {
+    public User 프로파일이미지변경(User principal, MultipartFile profileImgFile, HttpSession session) {
         // 1. 파일을 upload 폴더에 저장완료
         String profileImg = UtilFileUpload.write(uploadFolder, profileImgFile);
 
@@ -173,6 +173,8 @@ public class UserService {
 
             // 세션값 변경
             session.setAttribute("principal", userEntity);
+
+            return userEntity;
         } else {
             throw new CustomApiException("해당 유저를 찾을 수 없습니다.");
         }

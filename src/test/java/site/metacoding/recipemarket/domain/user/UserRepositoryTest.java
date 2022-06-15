@@ -146,7 +146,26 @@ public class UserRepositoryTest {
 
     @Test
     public void deleteById_테스트() {
-        assertEquals("1", "1");
+        // delete 후에 find해서 null이면 통과 assertNull
+
+        User user = User.builder()
+                .username("ssar")
+                .nickname("ssarr")
+                .password("12341234")
+                .email("ssar@nate.com")
+                .build();
+
+        userRepository.save(user); // save된 userEntity 확인 완료
+
+        // given
+        Integer id = 1;
+
+        // when
+        userRepository.deleteById(id);
+        Optional<User> userOp = userRepository.findById(id);
+
+        // then
+        assertEquals(false, userOp.isPresent());
     }
 
     // 시큐리티 로그인 시 유저네임 셀렉트하기 위한 쿼리 테스트
