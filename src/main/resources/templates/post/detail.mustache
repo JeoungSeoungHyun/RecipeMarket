@@ -30,11 +30,12 @@
         <ul id="reply-box" class="list-group">
             {{#comments}}
             <li class="list-group-item d-flex justify-content-between">
-                <div>{{comment.content}}</div>
+                <div id="comment-{{comment.id}}">{{comment.content}}</div>
                 <div class="d-flex">
                     <div class="font-italic">작성자 : {{comment.user.username}} &nbsp;</div>
                     {{#auth}}
-                    <button id="btn-update" type="button" class="badge bg-primary">수정</button>
+                    <button id="btn-{{comment.id}}" type="button" class="badge bg-primary"
+                        onclick="updateComment({{comment.id}},{{comment.content}})">수정</button>
                     <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
                     {{/auth}}
                 </div>
@@ -45,6 +46,20 @@
     <!-- 댓글 리스트 끝 -->
 
     <script>
+
+        function confirm(commentId, content) {
+            $(`#comment-${commentId}`).replaceWith(`<div id="comment-${commentId}">${content}</div>`);
+            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="updateComment(${commentId},${content})">수정</button>`);
+        }
+
+
+        function updateComment(commentId, content) {
+            $(`#comment-${commentId}`).replaceWith(`<input id="comment-${commentId}" type="text" value=${content} />`);
+            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="confirm(${commentId},${content})">확인</button>`);
+        }
+
+
+
         async function deleteComment(commentId) {
             let response = await fetch(`/s/api/comment/${commentId}`, {
                 method: "DELETE"

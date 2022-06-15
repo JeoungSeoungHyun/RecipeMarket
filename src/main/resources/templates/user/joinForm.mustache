@@ -87,6 +87,10 @@
         nickname: {
             state: false,
             msg: ""
+        },
+        email: {
+            state: false,
+            msg: ""
         }
     }
 
@@ -103,6 +107,10 @@
     });
 
     $("#same-password").focusout(() => {
+        passwordSameCheck();
+    });
+
+    $("#email").focusout(() => {
         passwordSameCheck();
     });
 
@@ -173,6 +181,26 @@
             valid.password.msg = "패스워드가 동일하지 않습니다.";
         }
     }
+
+    async function emailSameCheck() {
+        let email = $("#email").val();
+
+        let response = await fetch(`/api/user/email-same-check?email=${email}`);
+        let responseParse = await response.json();
+
+        if (response.status === 200) {
+            if (!responseParse) {
+                valid.email.state = false;
+                valid.email.msg = "이미 사용 중인 이메일입니다.";
+            } else {
+                valid.email.state = true;
+                valid.email.msg = "";
+            }
+        } else {
+            alert(responseParse);
+        }
+    }
+
 </script>
 
 {{> /layout/footer }}

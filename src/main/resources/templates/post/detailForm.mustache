@@ -1,4 +1,5 @@
 {{> /layout/listHeader}}
+<!--  본문  -->
 
 <div class="my-padding-top-lg d-flex align-items-center" style="flex-direction:column">
 
@@ -24,7 +25,7 @@
         </form>
     </div>
     <br />
-
+    <!-- 댓글 리스트 -->
     <div class="card detail-box-lg">
         <div class="card-header"><b>댓글 리스트</b></div>
         <ul id="reply-box" class="list-group">
@@ -43,4 +44,27 @@
 
 </div>
 
+<script>
+    async function loading() {
+        //console.log(location.href);
+        let postId = $("#postId").val();
+        let response = await fetch(`/api/post/${postId}`);
+        let responseParse = await response.json();  // text(), json()
+        console.log(responseParse);
+        postInfoRender(responseParse);
+    }
+    function postInfoRender(responseParse) {
+        let username = responseParse.data.post.user.username;
+        let title = responseParse.data.post.title;
+        let content = responseParse.data.post.content;
+        let auth = responseParse.data.auth; // 권한이 있는지 없는지 판단해서 true, false
+        if (auth == true) {
+            $("#auth-box").css("display", "block");
+        }
+        $("#username").text(username);
+        $("#title").text(title);
+        $("#content").html(content);
+    }
+    loading();
+</script>
 {{> /layout/footer}}
