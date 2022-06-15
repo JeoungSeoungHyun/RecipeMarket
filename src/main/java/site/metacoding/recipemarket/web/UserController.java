@@ -143,11 +143,10 @@ public class UserController {
                 if (name.equals("remember")) { // cookie[i] 의 이름이 remember일 때
                     String value = cookies[i].getValue(); // 쿠키 값 가져오기
                     model.addAttribute("remember", value); // 쿠키의 값을 모델에 담아서
-                    return "/user/loginForm"; // 뷰로 가져가기
                 }
             }
         }
-        return "/user/loginForm"; // 쿠키값 없음!
+        return "/user/loginForm";
     }
 
     // 회원 정보 수정 페이지
