@@ -54,16 +54,17 @@
 
     <div class="container">
         <ul class="pagination justify-content-center">
-            <li id="first" class="page-item"><a class="page-link" href="/post/?page=0"> << </a>
-            </li>
-            <li id="prev" class="page-item"><a class="page-link" href="/post/?page={{prev}}"> < </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="/post/?page={{pageNumber}}">{{prev}}</a></li>
-            <li class="page-item active"><a class="page-link" href="/post/?page={{pageNumber}}">{{pageNumber}}</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">{{next}}</a></li>
+
+            <li id="first" class="page-item"><a class="page-link" href="/post/?page=1"> << </a></li>
+            <li id="prev" class="page-item"><a class="page-link" href="/post/?page={{prev}}"> < </a></li>
+            
+            {{#pageNumbers}}
+            <li class="page-item"><a class="page-link" href="/post/?page={{.}}">{{.}}</a></li>
+            {{/pageNumbers}}
+
             <li id="next" class="page-item"><a class="page-link" href="/post/?page={{next}}"> > </a></li>
             <li id="last" class="page-item"><a class="page-link" href="/post/?page={{posts.totalPages}}"> >> </a></li>
+
         </ul>
     </div>
 

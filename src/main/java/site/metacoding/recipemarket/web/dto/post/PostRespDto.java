@@ -13,9 +13,9 @@ import site.metacoding.recipemarket.domain.post.Post;
 @NoArgsConstructor
 @Data
 public class PostRespDto {
-    private Page<Post> posts;
-    private Integer prev;
-    private Integer pageNumber;
-    private Integer next;
-    private List<Integer> pageNumbers;
+    private Page<Post> posts; // 모든 포스트
+    private Integer prev; // 이전 페이지
+    private Integer pageNumber; // 현재 페이지
+    private Integer next; // 다음 페이지
+    private List<Integer> pageNumbers; // 전체 페이지 수
 }

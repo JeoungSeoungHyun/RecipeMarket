@@ -19,8 +19,8 @@ public class PostController {
     
     // 리스트 페이지
     @GetMapping("/post")
-    public String listForm(Model model, @RequestParam(defaultValue = "0") Integer page) {
-        PostRespDto postRespDto = postService.게시물페이징(page);
+    public String listForm(Model model, @RequestParam(defaultValue = "1") Integer page) {
+        PostRespDto postRespDto = postService.게시물페이징(page-1);
         model.addAttribute("data", postRespDto);
         long count = postRepository.count();
         model.addAttribute("count", count);
