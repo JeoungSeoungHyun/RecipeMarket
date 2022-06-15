@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +12,6 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,7 +23,6 @@ import site.metacoding.recipemarket.domain.comment.Comment;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
 
@@ -51,7 +47,5 @@ public class Post {
     private List<Comment> comments;
 
     @CreatedDate // insert 할때만 동작
-    private LocalDateTime createDate;
-    @LastModifiedDate // update 할때만 동작
-    private LocalDateTime updateDate;
+    private LocalDateTime postDate;
 }
