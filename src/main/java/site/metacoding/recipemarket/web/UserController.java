@@ -63,12 +63,12 @@ public class UserController {
     // 아이디 찾기 페이지
     @GetMapping("/find-username-form")
     public String idFindForm() {
-        return "/user/findIdForm";
+        return "/user/findUsernameForm";
     }
 
     // 아이디 찾기 요청
     @PostMapping("/find-username")
-    public String idFind(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
+    public String findusername(@Valid IdFindReqDto idFindReqDto, BindingResult bindingResult, Model model) {
 
         UtilValid.요청에러처리(bindingResult);
         String findUserId = userService.아이디찾기(idFindReqDto);
@@ -79,7 +79,7 @@ public class UserController {
     // 비밀번호 찾기 페이지
     @GetMapping("/reset-password-form")
     public String passwordResetForm() {
-        return "/user/resetPwForm";
+        return "/user/resetPasswordForm";
     }
 
     // 비밀번호 찾기 (임시 비밀번호 발급)
@@ -137,15 +137,15 @@ public class UserController {
         Cookie[] cookies = request.getCookies(); // 모든 쿠키 가져오기
 
         if (cookies != null) {
-            String name = cookies[0].getName(); // 쿠키 이름 가져오기
-            String value = cookies[0].getValue(); // 쿠키 값 가져오기0
+            for (int i = 0; i < cookies.length; i++) {
+                String name = cookies[i].getName(); // 쿠키 이름 가져오기
 
-            if (name.equals("remember")) { // name이 remember 이면
-                model.addAttribute("remember", value); // name의 값을 모델에 담아서
-                return "/user/loginForm"; // 뷰로 가져가기
+                if (name.equals("remember")) { // cookie[i] 의 이름이 remember일 때
+                    String value = cookies[i].getValue(); // 쿠키 값 가져오기
+                    model.addAttribute("remember", value); // 쿠키의 값을 모델에 담아서
+                }
             }
         }
-
         return "/user/loginForm";
     }
 

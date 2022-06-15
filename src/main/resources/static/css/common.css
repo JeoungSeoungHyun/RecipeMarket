@@ -1,0 +1,102 @@
+/* 
+1. 로고 o
+2. 버튼(회원가입, 수정, 탈퇴) o
+3. 아이디찾기 버튼 o
+4. 큰 버튼 o
+5. 타이틀 텍스트 디자인 (회원가입,로그인, 찾기) o
+6. 작은 글자 o
+7. 박스텍스트
+8. fakeimage 
+10. 레시피 목록 텍스트
+11. 리스트 레시피 사진
+*/
+
+
+/*폰트*/
+body {
+    font-family: 'Noto Sans KR',
+        sans-serif;
+
+    
+}
+
+ 
+/*프로필 이미지*/
+.my-profile-img{
+    border-radius: 70%;
+}
+
+/* 위치 */
+.my-position-center{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+/* 버튼 */
+.my-btn-sm-primary{
+    width:90px;
+    height: 40px;
+    color:#5F0080;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
+}
+
+.my-btn-sm-black{
+    width:90px;
+    height: 40px;
+    color:black;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
+}
+
+.my-btn-sm-primary{
+    width:90px;
+    height: 40px;
+    color:#5F0080;
+    background-color: white;
+    border: 1px solid #5F0080;
+}
+
+.my-btn-md{
+    width: 120px;
+    height: 40px;
+    color: #4C4C4C;
+    border: 1px solid #5F0080;
+    background-color: white;
+}
+
+.my-btn-md-primary{
+    width: 120px;
+    height: 40px;
+    color: white;
+    border: 1px solid #5F0080;
+    background-color: #5F0080;
+}
+
+.my-btn-lg{
+    width: 400px;
+    height: 40px;
+    color: white;
+    background-color: #5F0080;
+    border: 0;
+}
+
+.gridbox{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px,1fr));
+    margin: auto;
+    margin-bottom: 30px;
+    justify-items: center;
+    place-items: center;
+}
+
+.gridbox2{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px,1fr));
+    margin: auto;
+    margin-bottom: 30px;
+    justify-items: center;
+    place-items: center;
+}

@@ -1,0 +1,46 @@
+{{> /layout/listHeader}}
+
+<div class="my-padding-top-lg d-flex align-items-center" style="flex-direction:column">
+
+    <div>
+        <iframe style="width: 1100px; height: 800px; margin-top:50px"
+            src="https://blog.naver.com/yee1036/222725624265?isInf=true" id="child-iframe"></iframe>
+    </div>
+
+    <div class=" detail-box-lg d-flex justify-content-end my-padding-bottom-sm">
+        <button type="submit" class="btn my-btn-sm-primary" style="width: 120px;">즐겨찾기 추가</button>
+    </div>
+
+    <!-- 댓글 시작 -->
+
+    <div class="card detail-box-lg ">
+        <form>
+            <div class="card-body">
+                <textarea name="content" class="form-control" rows="1"></textarea>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                <button type="submit" class="btn my_bg_primary my-font-color-white">등록</button>
+            </div>
+        </form>
+    </div>
+    <br />
+
+    <div class="card detail-box-lg">
+        <div class="card-header"><b>댓글 리스트</b></div>
+        <ul id="reply-box" class="list-group">
+            <li id="reply-1" class="list-group-item d-flex justify-content-between">
+                <div>댓글입니다</div>
+                <div class="d-flex">
+                    <div class="font-italic">작성자 : 홍길동 &nbsp;</div>
+                    <button class="badge my_bg_primary my-font-color-white">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <br />
+    <!-- 댓글 끝 -->
+
+
+</div>
+
+{{> /layout/footer}}

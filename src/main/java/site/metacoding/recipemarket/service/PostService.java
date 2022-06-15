@@ -2,6 +2,7 @@ package site.metacoding.recipemarket.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,5 +56,15 @@ public class PostService {
                 pageNumbers);
 
         return postRespDto;
+    }
+
+    public Post 글상세보기(Integer postId) {
+        Optional<Post> postOp = postRepository.findById(postId);
+
+        if (postOp.isPresent()) {
+            return postOp.get();
+        } else {
+            throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
+        }
     }
 }
