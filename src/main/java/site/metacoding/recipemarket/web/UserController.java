@@ -137,7 +137,7 @@ public class UserController {
         Cookie[] cookies = request.getCookies(); // 모든 쿠키 가져오기
 
         if (cookies != null) {
-            for (int i = 0; i <= cookies.length; i++) {
+            for (int i = 0; i < cookies.length; i++) {
                 String name = cookies[i].getName(); // 쿠키 이름 가져오기
 
                 if (name.equals("remember")) { // cookie[i] 의 이름이 remember일 때
