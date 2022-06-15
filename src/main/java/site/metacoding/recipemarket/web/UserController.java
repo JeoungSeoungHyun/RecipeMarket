@@ -137,16 +137,17 @@ public class UserController {
         Cookie[] cookies = request.getCookies(); // 모든 쿠키 가져오기
 
         if (cookies != null) {
-            String name = cookies[0].getName(); // 쿠키 이름 가져오기
-            String value = cookies[0].getValue(); // 쿠키 값 가져오기0
+            for (int i = 0; i <= cookies.length; i++) {
+                String name = cookies[i].getName(); // 쿠키 이름 가져오기
 
-            if (name.equals("remember")) { // name이 remember 이면
-                model.addAttribute("remember", value); // name의 값을 모델에 담아서
-                return "/user/loginForm"; // 뷰로 가져가기
+                if (name.equals("remember")) { // cookie[i] 의 이름이 remember일 때
+                    String value = cookies[i].getValue(); // 쿠키 값 가져오기
+                    model.addAttribute("remember", value); // 쿠키의 값을 모델에 담아서
+                    return "/user/loginForm"; // 뷰로 가져가기
+                }
             }
         }
-
-        return "/user/loginForm";
+        return "/user/loginForm"; // 쿠키값 없음!
     }
 
     // 회원 정보 수정 페이지
