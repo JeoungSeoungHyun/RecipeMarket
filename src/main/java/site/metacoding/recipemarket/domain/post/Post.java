@@ -25,7 +25,6 @@ import site.metacoding.recipemarket.domain.comment.Comment;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Post {
 
@@ -49,6 +48,5 @@ public class Post {
     @OneToMany(mappedBy = "post") // 연관관계의 주인의 변수명
     private List<Comment> comments;
 
-    @CreatedDate // insert 할때만 동작
     private LocalDateTime postDate;
 }

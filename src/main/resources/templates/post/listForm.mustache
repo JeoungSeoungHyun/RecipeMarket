@@ -1,84 +1,7 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-
-    </style>
-
-</head>
-
-<body>
-
-
-    <div class="container-fluid">
-        <h1>리스트 페이지</h1>
-        <br />
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>썸네일</th>
-                        <th>제목</th>
-                        <th>url</th>
-                        <th>작성일</th>
-                        <th>수정일</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#data}}
-                    {{#posts}}
-                    <tr>
-                        <td>{{#id}}{{id}}{{/id}}{{^id}}null{{/id}}</td>
-                        <td>{{title}}</td>
-                        <td>{{thumnail}}</td>
-                        <td>{{url}}</td>
-                        <td>{{createDate}}</td>
-                        <td>{{updateDate}}</td>
-                    </tr>
-                    {{/posts}}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <ul class="pagination justify-content-center">
-
-            <li id="first" class="page-item"><a class="page-link" href="/post/?page=1"> << </a></li>
-            <li id="prev" class="page-item"><a class="page-link" href="/post/?page={{prev}}"> < </a></li>
-            
-            {{#pageNumbers}}
-            <li class="page-item"><a class="page-link" href="/post/?page={{.}}">{{.}}</a></li>
-            {{/pageNumbers}}
-
-            <li id="next" class="page-item"><a class="page-link" href="/post/?page={{next}}"> > </a></li>
-            <li id="last" class="page-item"><a class="page-link" href="/post/?page={{posts.totalPages}}"> >> </a></li>
-
-        </ul>
-    </div>
-
-    {{/data}}
-
-</body>
-
-</html>
-=======
 {{> /layout/listHeader}}
 <!-- 리스트 상단 -->
-<div class="my-font-sm2 my-padding-bottom-sm my-padding-top-lg d-flex justify-content-between"
-    style="width: 950px; margin:auto;">
+{{#data}}
+<div class="my-font-sm2 my-padding-bottom-sm my-padding-top-lg d-flex justify-content-between" style="width: 950px; margin:auto;">
     <div> 총 몇개</div>
     <div class="d-flex">
         <div>인기순 </div>
@@ -91,77 +14,44 @@
 <div class="d-flex justify-content-center">
     <div class="" style="width: 1100px;">
         <div class="gridbox2">
+            <!-- 클릭시 id를 통해 요청을 할 수 있게 해줘야한다. -->
+            {{#posts}}
             <div class="card border-0">
                 <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
+                    <img src="{{#thumnail}}{{thumnail}}{{/thumnail}}{{^thumnail}}#{{/thumnail}}" class="card-img-top my-img-cover" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
+                    <h5 class="card-title my-font-sm2">{{title}}</h5>
                 </div>
             </div>
+            {{/posts}}
 
-            <div class="card border-0">
-                <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
-                </div>
-            </div>
-
-            <div class="card border-0">
-                <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
-                </div>
-            </div>
-
-            <div class="card border-0">
-                <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
-                </div>
-            </div>
-
-            <div class="card border-0">
-                <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
-                </div>
-            </div>
-
-            <div class="card border-0">
-                <div class="my-img-box1">
-                    <img src="http://www.seoulilbo.com/news/photo/201604/133262_57745_4754.jpg"
-                        class="card-img-top my-img-cover" alt="...">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title my-font-sm2">싱싱한 소고기 레시피</h5>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 <!-- 리스트 목록 끝 -->
 
-<!-- 버튼 -->
-<ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
-</ul>
-<!-- 버튼 -->
-{{> /layout/footer}}
->>>>>>> 1b08d943d4ab851636422676737eb7adbe9ef1c8
+<!-- 페이징 -->
+<div class="container">
+    <ul class="pagination justify-content-center">
+
+        <li id="first" class="page-item">
+            <a class="page-link" href="/post/?page=1">
+                << </a>
+        </li>
+        <li id="prev" class="page-item">
+            <a class="page-link" href="/post/?page={{prev}}">
+                < </a>
+        </li>
+
+        {{#pageNumbers}}
+        <li class="page-item"><a class="page-link" href="/post/?page={{.}}">{{.}}</a></li>
+        {{/pageNumbers}}
+
+        <li id="next" class="page-item"><a class="page-link" href="/post/?page={{next}}"> > </a></li>
+        <li id="last" class="page-item"><a class="page-link" href="/post/?page={{posts.totalPages}}"> >> </a></li>
+
+    </ul>
+</div>
+<!-- 페이징 -->
+{{/data}} {{> /layout/footer}}
