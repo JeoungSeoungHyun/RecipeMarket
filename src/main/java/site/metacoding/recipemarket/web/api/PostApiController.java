@@ -21,8 +21,9 @@ public class PostApiController {
 
     // 즐겨찾기 추가
     @PostMapping("/s/api/post/{postId}/favorite")
-    public ResponseEntity<?> favorite(@PathVariable Integer postId, @AuthenticationPrincipal LoginUser loginUser) {
-        FavoriteRespDto dto = postService.좋아요(postId, loginUser.getUser());
+    public ResponseEntity<?> favorite(@PathVariable Integer postId,
+            @AuthenticationPrincipal LoginUser loginUser) {
+        FavoriteRespDto dto = postService.즐겨찾기추가(postId, loginUser.getUser());
         System.out.println(dto);
         return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
@@ -31,7 +32,7 @@ public class PostApiController {
     @DeleteMapping("/s/api/post/{postId}/favorite/{favoriteId}")
     public ResponseEntity<?> unfavorite(@PathVariable Integer favoriteId,
             @AuthenticationPrincipal LoginUser loginUser) {
-        postService.좋아요취소(favoriteId, loginUser.getUser());
+        postService.즐겨찾기취소(favoriteId, loginUser.getUser());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

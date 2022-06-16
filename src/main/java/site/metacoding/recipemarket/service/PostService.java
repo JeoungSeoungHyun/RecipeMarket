@@ -12,6 +12,7 @@ import site.metacoding.recipemarket.domain.post.Post;
 import site.metacoding.recipemarket.domain.post.PostRepository;
 import site.metacoding.recipemarket.domain.user.User;
 import site.metacoding.recipemarket.handler.ex.CustomApiException;
+import site.metacoding.recipemarket.handler.ex.CustomException;
 import site.metacoding.recipemarket.web.dto.favorite.FavoriteRespDto;
 import site.metacoding.recipemarket.web.dto.favorite.FavoriteRespDto.PostDto;
 import site.metacoding.recipemarket.web.dto.post.PostDetailRespDto;
@@ -23,7 +24,7 @@ public class PostService {
     private final FavoriteRepository favoriteRepository;
 
     @Transactional
-    public FavoriteRespDto 좋아요(Integer postId, User principal) {
+    public FavoriteRespDto 즐겨찾기추가(Integer postId, User principal) {
 
         Optional<Post> postOp = postRepository.findById(postId);
         if (postOp.isEmpty()) {
@@ -46,7 +47,7 @@ public class PostService {
     }
 
     @Transactional
-    public void 좋아요취소(Integer favoriteId, User principal) {
+    public void 즐겨찾기취소(Integer favoriteId, User principal) {
         Optional<Favorite> favoriteOp = favoriteRepository.findById(favoriteId); // 즐겨찾기 번호 찾아서
         if (favoriteOp.isEmpty()) {
             throw new CustomApiException("요청하신 정보를 찾을 수 없습니다.");
@@ -89,26 +90,25 @@ public class PostService {
         // 게시글 찾기
         Optional<Post> postOp = postRepository.findById(postId);
 
-        if (postOp.isPresent()) { // 존재하는 게시글이면
-            Post postEntity = postOp.get();
-
-            // 리턴값 만들기
-            postDetailRespDto.setPost(postEntity);
-
-            // 즐겨찾기 유무 확인 후 리턴값 만들기
-            // 로그인한 사람의 userId와 상세보기한 postId로 Favorite 테이블에서 select해서 row가 있으면 true
-            Optional<Favorite> favoriteOp = favoriteRepository.mFindByUserIdAndPostId(principal.getId(), postId);
-            if (favoriteOp.isPresent()) {
-                Favorite favoriteEntity = favoriteOp.get();
-                postDetailRespDto.setFavoriteId(favoriteEntity.getId());
-                postDetailRespDto.setFavorite(true);
-            } else {
-                postDetailRespDto.setFavoriteId(0);
-                postDetailRespDto.setFavorite(false);
-            }
-            return postDetailRespDto;
-        } else {
-            throw new RuntimeException("해당 게시글을 찾을 수 없습니다");
+        if (postOp.isEmpty()) { // 존재하지 않는 게시글이면 익셉션처리
+            throw new CustomException("존재하지 않는 게시글입니다.");
         }
+
+        // 리턴값 만들기
+        Post postEntity = postOp.get();
+        postDetailRespDto.setPost(postEntity);
+
+        // 즐겨찾기 유무 확인 후 리턴값 만들기
+        // 로그인한 사람의 userId와 상세보기한 postId로 Favorite 테이블에서 select해서 row가 있으면 true
+        Optional<Favorite> favoriteOp = favoriteRepository.mFindByUserIdAndPostId(principal.getId(), postId);
+        if (favoriteOp.isPresent()) {
+            Favorite favoriteEntity = favoriteOp.get();
+            postDetailRespDto.setFavoriteId(favoriteEntity.getId());
+            postDetailRespDto.setFavorite(true);
+        } else {
+            postDetailRespDto.setFavoriteId(0);
+            postDetailRespDto.setFavorite(false);
+        }
+        return postDetailRespDto;
     }
 }
