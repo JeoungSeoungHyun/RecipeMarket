@@ -17,8 +17,8 @@ public class MailConfig {
 
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("everygreentime@gmail.com");
-        mailSender.setPassword("mpneanfebofqzpib");
+        mailSender.setUsername("아이디");
+        mailSender.setPassword("앱비밀번호");
 
         Properties javaMailProperties = new Properties();
 
@@ -31,18 +31,4 @@ public class MailConfig {
 
         return mailSender;
     }
-
-    // public void send() {
-    // Mail mail = new Mail();
-    // mail.setMailFrom("from@gmail.com");
-    // mail.setMailTo("to@gmail.com");
-    // mail.setMailSubject("This is Email test.");
-    // mail.setMailContent("Learn how to send email using Spring.");
-
-    // AbstractApplicationContext context = new
-    // AnnotationConfigApplicationContext(MailConfig.class);
-    // MailService mailService = (MailService) context.getBean("mailService");
-    // mailService.sendEmail(mail);
-    // context.close();
-    // }
 }
