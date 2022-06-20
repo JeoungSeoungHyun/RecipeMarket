@@ -1,6 +1,7 @@
 package site.metacoding.recipemarket.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doNothing;
 
@@ -23,12 +24,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Profile;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import site.metacoding.recipemarket.config.MailConfig;
 import site.metacoding.recipemarket.domain.user.User;
 import site.metacoding.recipemarket.domain.user.UserRepository;
 import site.metacoding.recipemarket.util.UtilEmail;
@@ -37,7 +41,8 @@ import site.metacoding.recipemarket.web.dto.user.PasswordResetReqDto;
 import site.metacoding.recipemarket.web.dto.user.UpdateReqDto;
 import site.metacoding.recipemarket.web.dto.user.UserRespDto;
 
-@ExtendWith(MockitoExtension.class) // Mockito 컨테이너 생성
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class) // Mockito 컨테이너 생성, IoC 컨테이너 내부에 있는 것처럼 속이기
 public class UserServiceTest {
 
     @InjectMocks
@@ -49,8 +54,11 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
-    @Mock
-    private UtilEmail utilEmail;
+    @Spy
+    private MailConfig mailConfig = new MailConfig();
+
+    @Spy
+    private UtilEmail utilEmail = new UtilEmail(mailConfig.getMailSender());
 
     @Test
     public void 마이페이지_테스트() {
@@ -105,35 +113,36 @@ public class UserServiceTest {
         assertEquals(userEntity.getUsername(), username);
     }
 
+    // sendEmail 테스트 미완료
     @Test
     public void 임시패스워드발급_테스트() {
         // given
         String username = "ssar";
-        String email = "xldzjqpf1588@nate.com";
+        String email = "xldzjqpf1588@naver.com";
 
         PasswordResetReqDto dto = new PasswordResetReqDto(username, email);
 
-        Mockito.doNothing().when(utilEmail).sendEmail("", "", "");
-        Mockito.when(utilEmail.sendEmail(email, "HI", "Hello")).thenReturn(null);
-
         // stub
-        User userEntity = User.builder()
+        User givenUser = User.builder()
                 .id(1)
                 .username("ssar")
                 .nickname("ssarr")
                 .password("12341234")
-                .email("xldzjqpf1588@nate.com")
+                .email("xldzjqpf1588@naver.com")
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        Optional<User> userOp = Optional.of(userEntity);
+        Optional<User> userOp = Optional.of(givenUser);
         Mockito.when(userRepository.findByUsernameAndEmail(username, email)).thenReturn(userOp);
 
+        // doNothing().when(utilEmail).sendEmail("", "", "");
+
         // when
-        userService.임시패스워드발급(dto);
+        User userEntity = userService.임시패스워드발급(dto);
 
         // then
+        assertEquals(email, userEntity.getEmail());
     }
 
     @Test

@@ -66,7 +66,7 @@ public class UserService {
     }
 
     @Transactional
-    public void 임시패스워드발급(PasswordResetReqDto passwordResetReqDto) {
+    public User 임시패스워드발급(PasswordResetReqDto passwordResetReqDto) {
 
         String tempPw; // 임시 비밀번호 변수
         User userEntity; // 유저 엔티티 변수
@@ -95,6 +95,7 @@ public class UserService {
 
         // 3. 임시 비밀번호 이메일로 전송 (받는 사람, 제목, 내용)
         utilEmail.sendEmail(userEntity.getEmail(), "임시 비밀번호 발급", "임시 비밀번호 : " + tempPw);
+        return userEntity;
 
     } // 더티체킹 (update)
 
