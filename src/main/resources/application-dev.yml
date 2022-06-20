@@ -27,7 +27,7 @@ spring:
   mustache:
     expose-session-attributes: true
   datasource:
-      url: jdbc:mariadb://localhost:3306/greendb
+      url: jdbc:mariadb://localhost:3306/market
       driver-class-name: org.mariadb.jdbc.Driver
       username: green
       password: green1234
