@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -34,9 +37,14 @@
                 <div class="d-flex">
                     <div class="font-italic">작성자 : {{comment.user.username}} &nbsp;</div>
                     {{#auth}}
-                    <button id="btn-{{comment.id}}" type="button" class="badge bg-primary"
-                        onclick="updateComment({{comment.id}},{{comment.content}})">수정</button>
-                    <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
+                    <div style="display: flex; justify-content: space-around; width: 130px;">
+                        <div><button id="btn-{{comment.id}}" type="button" class="badge bg-primary"
+                                onclick="updateComment({{comment.id}},'{{comment.content}}')">수정</button></div>
+                        <div>
+                            <button class="badge bg-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
+                        </div>
+                        <div id="btn-cancle"></div>
+                    </div>
                     {{/auth}}
                 </div>
             </li>
@@ -46,18 +54,36 @@
     <!-- 댓글 리스트 끝 -->
 
     <script>
-
         function confirm(commentId, content) {
             $(`#comment-${commentId}`).replaceWith(`<div id="comment-${commentId}">${content}</div>`);
-            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="updateComment(${commentId},${content})">수정</button>`);
+            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="updateComment(${commentId},'${content}')">수정</button>`);
         }
-
-
         function updateComment(commentId, content) {
             $(`#comment-${commentId}`).replaceWith(`<input id="comment-${commentId}" type="text" value=${content} />`);
-            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="confirm(${commentId},${content})">확인</button>`);
+            $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="badge bg-primary" onclick="confirm(${commentId},'${content}')">확인</button>`);
+            $("#btn-cancle").replaceWith('<button id="canclePage" type="button" class="badge bg-primary" onclick="canclePage">취소</button>');
+            console.log("되고있니");
+
+            $("#canclePage").click((event) => {
+                self.location = "/post/{{postId}}";
+            });
         }
 
+
+        async function confirm(commentId) {
+            let response = await fetch(`/s/api/comment/${commentId}`, {
+                method: "PUT"
+            });
+            if (response.status == 200) {
+                alert("수정성공");
+                location.reload(); // ajax + ssr
+            } else {
+                console.error();
+                alert("수정 실패");
+                console.log("에러" + error);
+
+            }
+        }
 
 
         async function deleteComment(commentId) {
