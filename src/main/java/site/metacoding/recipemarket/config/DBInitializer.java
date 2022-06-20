@@ -1,6 +1,6 @@
 package site.metacoding.recipemarket.config;
 
-import java.util.Locale.Category;
+import java.time.LocalDateTime;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +18,13 @@ public class DBInitializer {
 
         return (args) -> {
             User principal = User.builder()
+                    .id(1)
                     .username("ssar")
-                    .password("1234")
-                    .email("xldzjqpf1588@naver.com")
+                    .nickname("ssarr")
+                    .password("12341234")
+                    .email("ssar@nate.com")
+                    .createDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             userRepository.save(principal);

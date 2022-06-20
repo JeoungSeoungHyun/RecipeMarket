@@ -21,7 +21,7 @@ public class TestUserDetailsService implements UserDetailsService {
                 .id(1)
                 .username("ssar")
                 .nickname("ssarr")
-                .password("1234")
+                .password("12341234")
                 .email("ssar@nate.com")
                 .createDate(LocalDateTime.now())
                 .updateDate(LocalDateTime.now())
