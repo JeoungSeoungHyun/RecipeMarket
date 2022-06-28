@@ -31,7 +31,12 @@ public class CommentService {
         } else { // id가 존재하지 않으면 예외처리
             throw new RuntimeException("해당 댓글이 없습니다");
         }
+        System.out.println("id : " + id);
+        System.out.println("principal : " + principal);
+        System.out.println("dto : " + dto);
         Comment commentEntity = commentOp.get();
+        System.out.println("수정 전 내용 : " + commentEntity.getContent());
+        System.out.println("수정 할 내용 : " + dto.toEntity().getContent());
         commentEntity.setContent(dto.toEntity().getContent()); // 영속화된 오브젝트 수정
     }
 

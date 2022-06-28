@@ -71,16 +71,24 @@
 
 
         async function confirm(commentId) {
+            let body = {
+                content: "bbq"
+            };
             let response = await fetch(`/s/api/comment/${commentId}`, {
-                method: "PUT"
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(body)
             });
             if (response.status == 200) {
                 alert("수정성공");
                 location.reload(); // ajax + ssr
             } else {
-                console.error();
+                //alert("잘됩니다?!");
+                //console.error();
                 alert("수정 실패");
-                console.log("에러" + error);
+                //console.log("에러" + error);
 
             }
         }
