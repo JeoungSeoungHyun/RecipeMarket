@@ -10,14 +10,19 @@
     <!-- 정보 -->
     <center>
         <div style="width: 700px; margin:auto">
-            <form action="/join" method="post" class="was-validated">
+            <form action="/join" method="post" onsubmit="return validation()" class="was-validated">
                 <div class="my-padding-bottom-md">
                     <h4>회원가입</h4>
                 </div>
+
+                <div class="my-error-box my-hidden">
+                </div>
+
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">아이디 </span>
-                        <input type="text" class="form-control my-flex-item3" id="username" placeholder="아이디를 입력해주세요" name="username" minlength="4" maxlength="20" required />
+                        <input type="text" class="form-control my-flex-item3" id="username" placeholder="아이디를 입력해주세요"
+                            name="username" minlength="4" maxlength="20" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -25,7 +30,8 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">닉네임</span>
-                        <input type="text" class="form-control my-flex-item3" id="nickname" placeholder="닉네임을 입력해주세요" name="nickname" minlength="1" maxlength="12" required />
+                        <input type="text" class="form-control my-flex-item3" id="nickname" placeholder="닉네임을 입력해주세요"
+                            name="nickname" minlength="1" maxlength="12" required />
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -33,7 +39,12 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">비밀번호</span>
-                        <input type="password" class="form-control my-flex-item3" id="password" placeholder="비밀번호를 입력해주세요" name="password" minlength="8" maxlength="16" required />
+                        <<<<<<< HEAD <input type="password" class="form-control my-flex-item3" id="password"
+                            placeholder="비밀번호를 입력해주세요" name="password" minlength="8" maxlength="16" required />
+                        =======
+                        <input type="password" class="form-control my-flex-item3" id="password"
+                            placeholder="비밀번호를 입력해주세요" name="password" minlength="8" maxlength="16" required />
+                        >>>>>>> 07f826a2d2be971e53ea1c7959001d3bd678b67b
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -41,7 +52,14 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">비밀번호 확인</span>
-                        <input type="password" class="form-control my-flex-item3" id="same-password" placeholder="비밀번호를 한번 더 입력해주세요" name="same-password" minlength="8" maxlength="16" required />
+                        <<<<<<< HEAD <input type="password" class="form-control my-flex-item3" id="same-password"
+                            placeholder="비밀번호를 한번 더 입력해주세요" name="same-password" minlength="8" maxlength="16"
+                            required />
+                        =======
+                        <input type="password" class="form-control my-flex-item3" id="same-password"
+                            placeholder="비밀번호를 한번 더 입력해주세요" name="same-password" minlength="8" maxlength="16"
+                            required />
+                        >>>>>>> 07f826a2d2be971e53ea1c7959001d3bd678b67b
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -49,7 +67,12 @@
                 <div class="form-group">
                     <div class="d-flex">
                         <span class="my-flex-item1 my-text-center">이메일</span>
-                        <input type="email" class="form-control  my-flex-item3" id="email" placeholder="이메일을 입력해주세요" name="email" minlength="1" maxlength="60" required />
+                        <<<<<<< HEAD <input type="email" class="form-control  my-flex-item3" id="email"
+                            placeholder="이메일을 입력해주세요" name="email" minlength="1" maxlength="60" required />
+                        =======
+                        <input type="email" class="form-control  my-flex-item3" id="email" placeholder="이메일을 입력해주세요"
+                            name="email" minlength="1" maxlength="60" required />
+                        >>>>>>> 07f826a2d2be971e53ea1c7959001d3bd678b67b
                     </div>
                     <div class="valid-feedback">Valid.</div>
                 </div>
@@ -63,4 +86,106 @@
 </div>
 <!-- 회원가입폼 끝 -->
 
-{{> /layout/footer}}
+<script>
+
+    let valid = {
+        username: {
+            state: false,
+            msg: ""
+        },
+        password: {
+            state: false,
+            msg: ""
+        },
+        nickname: {
+            state: false,
+            msg: ""
+        }
+    }
+
+    $("#username").focusout(() => {
+        usernameSameCheck();
+    });
+
+    $("#nickname").focusout(() => {
+        nicknameSameCheck();
+    });
+
+    $("#password").focusout(() => {
+        passwordSameCheck();
+    });
+
+    $("#same-password").focusout(() => {
+        passwordSameCheck();
+    });
+
+    function validation() {
+        if (valid.username.state && valid.password.state && valid.nickname.state) {
+            return true;
+        } else {
+            let errorMsgs = ``;
+
+            errorMsgs += `${valid.username.msg}<br/>`;
+            errorMsgs += `${valid.password.msg}<br/>`;
+            errorMsgs += `${valid.nickname.msg}<br/>`;
+
+            $(".my-error-box").html(errorMsgs);
+            $(".my-error-box").removeClass("my-hidden");
+            return false;
+        }
+    }
+
+    async function usernameSameCheck() {
+        let username = $("#username").val();
+
+        let response = await fetch(`/api/user/username-same-check?username=${username}`);
+        let responseParse = await response.json();
+
+        if (response.status === 200) {
+            if (!responseParse) {
+                valid.username.state = false;
+                valid.username.msg = "이미 사용중인 아이디입니다.";
+            } else {
+                valid.username.state = true;
+                valid.username.msg = "";
+            }
+        } else {
+            alert(responseParse);
+        }
+    }
+
+    async function nicknameSameCheck() {
+        let nickname = $("#nickname").val();
+
+        let response = await fetch(`/api/user/nickname-same-check?nickname=${nickname}`);
+        let responseParse = await response.json();
+
+        if (response.status === 200) {
+            if (!responseParse) {
+                valid.nickname.state = false;
+                valid.nickname.msg = "이미 사용중인 닉네임입니다.";
+            } else {
+                valid.nickname.state = true;
+                valid.nickname.msg = "";
+            }
+        } else {
+            alert(responseParse);
+        }
+    }
+
+
+    function passwordSameCheck() {
+        let password = $("#password").val();
+        let samePassword = $("#same-password").val();
+
+        if (password === samePassword) {
+            valid.password.state = true;
+            valid.password.msg = "";
+        } else {
+            valid.password.state = false;
+            valid.password.msg = "패스워드가 동일하지 않습니다.";
+        }
+    }
+</script>
+
+{{> /layout/footer }}

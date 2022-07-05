@@ -15,14 +15,24 @@
 /*폰트*/
 body {
     font-family: 'Noto Sans KR',
-        sans-serif;
-
-    
+        sans-serif;   
 }
 
- 
+ /*이미지 박스  */
+ .my-update-img-box {
+    width: 300px;
+    height: 300px;
+}
+.my-mypage-img-box {
+    width: 180px;
+    height: 180px;
+}
+
 /*프로필 이미지*/
 .my-profile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
     border-radius: 70%;
 }
 
@@ -35,6 +45,24 @@ body {
 }
 
 /* 버튼 */
+.my-btn-xsm-white{
+    width: 50px;
+    height: 30px;
+    color:black;
+    font-size: 13px;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
+}
+
+.my-btn-xsm-primary{
+    width: 50px;
+    height: 30px;
+    color:white;
+    font-size: 13px;
+    background-color: #5F0080;
+    border: 1px solid #5F0080;;
+}
+
 .my-btn-sm-primary{
     width:90px;
     height: 40px;
@@ -100,3 +128,15 @@ body {
     justify-items: center;
     place-items: center;
 }
+
+/* 에러박스 */
+.my-error-box {
+    background-color: rgb(250, 200, 200);
+    font-style: italic;
+    padding: 15px;
+}
+
+.my-hidden {
+    display: none;
+}
+

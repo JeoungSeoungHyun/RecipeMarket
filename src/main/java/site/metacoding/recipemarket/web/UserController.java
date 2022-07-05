@@ -106,7 +106,7 @@ public class UserController {
     // 메인 페이지
     @GetMapping("/")
     public String index() {
-        return "/index";
+        return "/main";
     }
 
     // 쿠키 response에 담기

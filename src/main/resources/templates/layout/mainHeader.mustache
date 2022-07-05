@@ -29,22 +29,24 @@
                     <div class="my-padding-right1">
                         <a class="my-font-sm1" href=""> 로그아웃 </a>
                         <span class="my-font-sm1"> | </span>
-                        <a class="my-font-sm1" href=""> 마이페이지 </a>
+                        <a class="my-font-sm1" href="/s/user/{userId}"> 마이페이지 </a>
                     </div>
                 </div>
                 {{/principal}}
                 {{^principal}}
                 <div class="nav justify-content-end">
                     <div class="my-padding-right1">
-                        <a class="my-font-sm1" href=""> 회원가입 </a>
+                        <a class="my-font-sm1" href="join-form"> 회원가입 </a>
                         <span class="my-font-sm1"> | </span>
-                        <a class="my-font-sm1" href=""> 로그인 </a>
+                        <a class="my-font-sm1" href="login-form"> 로그인 </a>
                     </div>
                 </div>
                 {{/principal}}
 
                 <div>
-                    <center><img src="/images/recipeLogo.png" width="150" height="100" alt="Logo"></center>
+                    <a href="/">
+                        <center><img src="/images/recipeLogo.png" width="150" height="100" alt="Logo"></center>
+                    </a>
                 </div>
 
                 <div style="padding-left: 10%; padding-right: 10%;">
