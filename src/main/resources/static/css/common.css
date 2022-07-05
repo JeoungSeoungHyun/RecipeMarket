@@ -45,6 +45,24 @@ body {
 }
 
 /* 버튼 */
+.my-btn-xsm-white{
+    width: 50px;
+    height: 30px;
+    color:black;
+    font-size: 13px;
+    background-color: #F7F7F7;
+    border: 1px solid #F7F7F7;;
+}
+
+.my-btn-xsm-primary{
+    width: 50px;
+    height: 30px;
+    color:white;
+    font-size: 13px;
+    background-color: #5F0080;
+    border: 1px solid #5F0080;;
+}
+
 .my-btn-sm-primary{
     width:90px;
     height: 40px;

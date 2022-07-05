@@ -1,4 +1,5 @@
 {{> /layout/listHeader}}
+<!--  본문  -->
 
 <div class="my-padding-top-lg d-flex align-items-center" style="flex-direction:column">
 
@@ -14,7 +15,7 @@
     <!-- 댓글 시작 -->
 
     <div class="card detail-box-lg ">
-        <form>
+        <form action="/s/post/{{postId}}/comment" method="post">
             <div class="card-body">
                 <textarea name="content" class="form-control" rows="1"></textarea>
             </div>
@@ -25,22 +26,86 @@
     </div>
     <br />
 
+    <!-- 댓글 리스트 -->
     <div class="card detail-box-lg">
         <div class="card-header"><b>댓글 리스트</b></div>
         <ul id="reply-box" class="list-group">
+            {{#comments}}
             <li id="reply-1" class="list-group-item d-flex justify-content-between">
-                <div>댓글입니다</div>
+                <div id="comment-{{comment.id}}">{{comment.content}}</div>
                 <div class="d-flex">
-                    <div class="font-italic">작성자 : 홍길동 &nbsp;</div>
-                    <button class="badge my_bg_primary my-font-color-white">삭제</button>
+                    <div class="font-italic">작성자 : {{comment.user.username}} &nbsp;</div>
+                    {{#auth}}
+                    <div style="display: flex; justify-content: space-around; width: 150px;">
+                        <div><button id="btn-{{comment.id}}" type="button" class="btn my-btn-xsm-white"
+                                onclick="updateComment({{comment.id}},'{{comment.content}}')">수정</button></div>
+                        <div>
+                            <button class="my-btn-xsm-primary" onclick="deleteComment('{{comment.id}}');">삭제</button>
+                        </div>
+                        <div id="cancle-{{comment.id}}"></div>
+                    </div>
+                    {{/auth}}
                 </div>
             </li>
+            {{/comments}}
         </ul>
     </div>
     <br />
     <!-- 댓글 끝 -->
-
-
 </div>
+
+<script>
+    function confirm(commentId, content) {
+        $(`#comment-${commentId}`).replaceWith(`<div id="comment-${commentId}">${content}</div>`);
+        $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="my-btn-xsm-primary" onclick="updateComment(${commentId},'${content}')">수정</button>`);
+    }
+    function updateComment(commentId, content) {
+        $(`#comment-${commentId}`).replaceWith(`<input id="comment-${commentId}" type="text" value=${content} />`);
+        $(`#btn-${commentId}`).replaceWith(`<button id="btn-${commentId}" type="button" class="my-btn-xsm-white" onclick="confirm(${commentId},'${content}')">확인</button>`);
+        $(`#cancle-${commentId}`).replaceWith('<button id="canclePage" type="button" class="my-btn-xsm-white" onclick="canclePage">취소</button>');
+        console.log("되고있니");
+
+        $("#canclePage").click((event) => {
+            self.location = "/post/{{postId}}";
+        });
+    }
+
+
+    async function confirm(commentId) {
+        let body = {
+            content: $(`#comment-${commentId}`).val()
+        };
+        let response = await fetch(`/s/api/comment/${commentId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(body)
+        });
+        if (response.status == 200) {
+            alert("수정성공");
+            location.reload(); // ajax + ssr
+        } else {
+            //alert("잘됩니다?!");
+            //console.error();
+            alert("수정 실패");
+            //console.log("에러" + error);
+
+        }
+    }
+
+
+    async function deleteComment(commentId) {
+        let response = await fetch(`/s/api/comment/${commentId}`, {
+            method: "DELETE"
+        });
+        if (response.status == 200) {
+            alert("삭제 성공");
+            location.reload(); // ajax + ssr
+        } else {
+            alert("삭제 실패");
+        }
+    }
+</script>
 
 {{> /layout/footer}}

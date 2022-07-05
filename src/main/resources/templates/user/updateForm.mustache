@@ -1,10 +1,10 @@
 {{>/layout/mainHeader}}
-
 <!-- 유저수정폼시작 -->
 <input type="hidden" class="my-hidden" id="userId" value="{{principal.id}}" />
 <div class="my-padding-top-lg d-flex justify-content-center" style="width:900px; margin:auto;">
     <!-- 사진 -->
     <div class="my-flex-item1 my-img-box2 my-img-login">
+
         <div class="my-update-img-box ">
             {{#principal}}
             {{#profileImg}}
@@ -15,6 +15,8 @@
                 id="profile-img-btn">
             {{/profileImg}}
             {{/principal}}
+
+
             <form id="fileForm">
                 <input type="file" style="display:none ;" id="profile-img-input" name="profileImgFile" />
             </form>
@@ -115,6 +117,7 @@
             alert("프로파일 변경 실패");
         }
     }
+
     function imgPreview(event, f) {
         let reader = new FileReader();
         // 콜백 (파일 이미지가 객체화 되면!!)
