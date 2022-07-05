@@ -46,6 +46,6 @@ public class PostController {
         }
 
         model.addAttribute("comments", comments); // 댓글
-        return "/post/detail";
+        return "/post/detailForm";
     }
 }
